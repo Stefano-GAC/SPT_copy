@@ -1,0 +1,838 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sauna Puerta de Toledo en Madrid. Información de tarifas, ubicación y contacto para confirmar horarios y disponibilidad.">
+<meta name="keywords" content="sauna gay Madrid, spa gay, baño turco, masajes, intimidad, discreción">
+<meta property="og:title" content="Sauna Puerta de Toledo - Tu Espacio Íntimo en Madrid">
+<meta property="og:description" content="Experiencia de bienestar y placer en un entorno discreto y profesional.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://saunapuertadetoledo.com/">
+<meta property="og:image" content="assets/images/logo-spt.png">
+<meta name="theme-color" content="#1a1a1a">
+<title>Sauna Puerta de Toledo - Tu Espacio Íntimo en Madrid</title>
+
+<!--
+  Schema JSON-LD para SEO.
+  Mantener este bloque en <head>: no mover a js/main.js porque los buscadores
+  lo leen como datos estructurados del documento.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "Sauna Puerta de Toledo",
+  "url": "https://saunapuertadetoledo.com",
+  "description": "Espacio de bienestar y encuentro en Madrid centro. Sauna, jacuzzi, baño de vapor y zona de masajes.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Cuesta de las Descargas, 6",
+    "addressLocality": "Madrid",
+    "postalCode": "28005",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.408029,
+    "longitude": -3.712308
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "14:00", "closes": "23:00" }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/saunapuertadetoledo/",
+    "https://www.facebook.com/saunapuertadetoledo"
+  ]
+}
+</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- AOS (Animate On Scroll) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+<!-- Favicon -->
+<link rel="icon" href="assets/images/logo-spt.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/images/logo-spt.png">
+</head>
+
+<body>
+
+<!-- ========== BARRA DE PROGRESO SCROLL ========== -->
+<div id="scroll-progress"></div>
+
+<!-- ========== PANTALLA DE CARGA ========== -->
+<div id="loading-screen">
+  <div class="loader-content">
+    <div class="loader-logo">SPT</div>
+    <div class="loader-tagline">Sauna Puerta de Toledo</div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== NAVEGACIÓN ========== -->
+<header class="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <a href="#" class="logo">
+        <img src="assets/images/logo-spt.png" alt="Sauna Puerta de Toledo" class="logo-img">
+      </a>
+      <nav class="nav-menu">
+        <a href="#inicio" class="nav-link" data-i18n="nav_home">Inicio</a>
+        <a href="#nosotros" class="nav-link" data-i18n="nav_about">Sobre Nosotros</a>
+        <a href="#instalaciones" class="nav-link" data-i18n="nav_facilities">Instalaciones</a>
+        <a href="#horarios" class="nav-link" data-i18n="nav_hours">Horarios</a>
+        <a href="#precios" class="nav-link" data-i18n="nav_prices">Precios</a>
+        <a href="#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
+        <a href="#contacto" class="nav-link cta-btn" data-i18n="nav_book">Reservar</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="language-toggle" class="language-toggle" type="button" aria-label="Cambiar idioma">EN</button>
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section id="inicio" class="hero">
+  <div class="hero-carousel">
+    <div class="hero-background active" style="background-image: linear-gradient(135deg, rgba(26,26,26,0.5) 0%, rgba(42,15,15,0.5) 100%), url('assets/images/hero-1.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="hero-background" style="background-image: linear-gradient(135deg, rgba(26,26,26,0.5) 0%, rgba(42,15,15,0.5) 100%), url('assets/images/hero-2.jpg'); background-size: cover; background-position: center;"></div>
+  </div>
+  <div class="hero-cinemagraph" aria-hidden="true">
+    <span class="steam steam-1"></span>
+    <span class="steam steam-2"></span>
+    <span class="steam steam-3"></span>
+  </div>
+  <div class="brand-seal" data-aos="fade-left" data-aos-delay="350">
+    <span>SPT Signature</span>
+  </div>
+  <div class="hero-content">
+    <div id="event-mode-badge" class="event-mode-badge" aria-live="polite"></div>
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+      Tu Espacio Íntimo
+    </h1>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+      Espacio de bienestar y encuentro en Madrid centro
+    </p>
+    <div class="hero-ctas" data-aos="fade-up" data-aos-delay="300">
+      <button class="btn btn-primary" type="button" data-scroll-target="precios">Ver Precios</button>
+      <button class="btn btn-secondary" type="button" data-action="open-whatsapp">Consultar por WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MODO EXPERIENCIA ========== -->
+<section class="section experience-mode dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Elige tu experiencia</h2>
+      <p class="section-subtitle">Adapta la experiencia según cómo quieres sentir tu visita hoy</p>
+    </div>
+    <div class="experience-chips" id="experience-chips" data-aos="fade-up" data-aos-delay="100">
+      <button class="chip active" data-mode="relax">Relax</button>
+      <button class="chip" data-mode="social">Social</button>
+      <button class="chip" data-mode="massage">Masaje</button>
+    </div>
+    <div class="experience-panel" data-aos="fade-up" data-aos-delay="200">
+      <h3 id="experience-title">Plan Relax</h3>
+      <p id="experience-description">Empieza por baño de vapor, continúa con jacuzzi y termina en zona lounge para una desconexión profunda y elegante.</p>
+      <button class="btn btn-primary" id="experience-cta" type="button">Ver recorrido relax</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NARRATIVA VISUAL ========== -->
+<section class="section journey">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Una visita en 3 momentos</h2>
+      <p class="section-subtitle">Un recorrido claro para anticipar cada sensación desde tu llegada</p>
+    </div>
+    <div class="journey-line" data-aos="fade-up" data-aos-delay="100">
+      <article class="journey-step">
+        <span class="journey-index">01</span>
+        <h3>Llegas</h3>
+        <p>Acceso en recepción, bienvenida ágil y orientación breve para que elijas tu ritmo desde el primer minuto.</p>
+      </article>
+      <article class="journey-step">
+        <span class="journey-index">02</span>
+        <h3>Desconectas</h3>
+        <p>Recorre sauna, vapor y jacuzzi para bajar pulsaciones, soltar tensión y entrar en modo pausa.</p>
+      </article>
+      <article class="journey-step">
+        <span class="journey-index">03</span>
+        <h3>Recargas</h3>
+        <p>Cierra en zonas de descanso con sensación de calma, claridad y energía renovada.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SOBRE NOSOTROS ========== -->
+<section id="nosotros" class="section about">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Sobre Nosotros</h2>
+      <p class="section-subtitle">Información clara y actualizada para tu visita</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-icon">🌡️</div>
+        <h3>Especialistas en Bienestar</h3>
+        <p>Un entorno pensado para el descanso, la desconexión y el bienestar personal.</p>
+      </div>
+      <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-icon">🔒</div>
+        <h3>Privacidad y Discreción</h3>
+        <p>Trabajamos con enfoque en discreción, respeto y trato profesional en todo momento.</p>
+      </div>
+      <div class="about-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-icon">⭐</div>
+        <h3>Atención Profesional</h3>
+        <p>Equipo disponible para resolver dudas y acompañarte durante tu visita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INSTALACIONES ========== -->
+<section id="instalaciones" class="section facilities dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Nuestras Instalaciones</h2>
+      <p class="section-subtitle">Servicios destacados del espacio</p>
+    </div>
+    <div class="facilities-grid">
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="0">
+        <div class="facility-icon">🔥</div>
+        <h3>Sauna Finlandesa</h3>
+        <p>Zona de sauna para relajación y bienestar.</p>
+      </div>
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="facility-icon">💨</div>
+        <h3>Baño de Vapor</h3>
+        <p>Zona de vapor disponible en el recorrido del local.</p>
+      </div>
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="facility-icon">💧</div>
+        <h3>Jacuzzi</h3>
+        <p>Zona de agua para descanso y relax.</p>
+      </div>
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="300">
+        <div class="facility-icon">🛏️</div>
+        <h3>Cabinas Privadas</h3>
+        <p>Espacios de uso privado. Consulta condiciones en recepción.</p>
+      </div>
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="400">
+        <div class="facility-icon">🍷</div>
+        <h3>Bar y Lounge</h3>
+        <p>Zona de descanso para pausas durante la visita.</p>
+      </div>
+      <div class="facility-card" data-aos="zoom-in" data-aos-delay="500">
+        <div class="facility-icon">🧖</div>
+        <h3>Masajes Profesionales</h3>
+        <p>Servicio de masaje disponible bajo consulta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TOUR INTERACTIVO ========== -->
+<section class="section tour dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Tour rápido del espacio</h2>
+      <p class="section-subtitle">Vista previa visual para conocer el ritmo del recorrido antes de venir</p>
+    </div>
+    <div class="tour-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="tour-stage" id="tour-stage">
+        <img id="tour-image" src="assets/images/gallery-sauna.jpg" alt="Tour">
+      </div>
+      <div class="tour-info">
+        <p class="tour-step-label" id="tour-step-label">Paso 1 de 4</p>
+        <h3 id="tour-title">Recepción y acceso</h3>
+        <p id="tour-description">Llegada al local, validación de acceso y orientación inicial para empezar el recorrido.</p>
+        <div class="tour-controls">
+          <button class="btn btn-secondary" id="tour-prev" type="button">Anterior</button>
+          <button class="btn btn-primary" id="tour-next" type="button">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HORARIOS ========== -->
+<section id="horarios" class="section schedule">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Horarios</h2>
+      <p class="section-subtitle">Horario actual: todos los días de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.</p>
+    </div>
+    <p class="flip-hint">Haz click en las tarjetas para ver el nivel de movimiento por franja</p>
+    <div class="schedule-grid">
+      <!-- Lunes a Jueves -->
+      <div class="schedule-card-flip" data-aos="fade-up" data-aos-delay="0">
+        <div class="schedule-card-inner">
+          <div class="schedule-card-front">
+            <h3>Lunes a Jueves</h3>
+            <p class="schedule-time">14:00 - 23:00</p>
+            <p class="schedule-note">Ritmo más relajado</p>
+            <p class="click-hint">◆ Click para ver movimiento</p>
+          </div>
+          <div class="schedule-card-back">
+            <p class="schedule-back-title">Movimiento estimado</p>
+            <span class="schedule-status-badge" id="sched-status-weekday">—</span>
+            <div class="schedule-prog-wrap">
+              <span class="schedule-prog-label">14:00</span>
+              <div class="schedule-prog-track">
+                <div class="schedule-prog-band weekday"></div>
+                <div class="schedule-prog-highlight" id="sched-highlight-weekday"></div>
+                <div class="schedule-prog-marker" id="sched-marker-weekday"></div>
+              </div>
+              <span class="schedule-prog-label">23:00</span>
+            </div>
+            <div class="schedule-legend">
+              <span class="schedule-legend-item" data-level="calm"><i class="legend-dot calm"></i>Menos movimiento</span>
+              <span class="schedule-legend-item" data-level="steady"><i class="legend-dot steady"></i>Movimiento medio</span>
+              <span class="schedule-legend-item" data-level="peak"><i class="legend-dot peak"></i>Más movimiento</span>
+            </div>
+            <p class="schedule-current-time" id="sched-time-weekday"></p>
+            <p class="schedule-movement-copy" id="sched-copy-weekday">Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.</p>
+            <p class="schedule-peak-window" id="sched-peak-weekday"></p>
+            <p class="sched-back-hint">◆ Click para volver</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Viernes a Domingo -->
+      <div class="schedule-card-flip" data-aos="fade-up" data-aos-delay="100">
+        <div class="schedule-card-inner">
+          <div class="schedule-card-front">
+            <h3>Viernes a Domingo</h3>
+            <p class="schedule-time">14:00 - 23:00</p>
+            <p class="schedule-note">Más ambiente social</p>
+            <p class="click-hint">◆ Click para ver movimiento</p>
+          </div>
+          <div class="schedule-card-back">
+            <p class="schedule-back-title">Movimiento estimado</p>
+            <span class="schedule-status-badge" id="sched-status-weekend">—</span>
+            <div class="schedule-prog-wrap">
+              <span class="schedule-prog-label">14:00</span>
+              <div class="schedule-prog-track">
+                <div class="schedule-prog-band weekend"></div>
+                <div class="schedule-prog-highlight" id="sched-highlight-weekend"></div>
+                <div class="schedule-prog-marker" id="sched-marker-weekend"></div>
+              </div>
+              <span class="schedule-prog-label">23:00</span>
+            </div>
+            <div class="schedule-legend">
+              <span class="schedule-legend-item" data-level="calm"><i class="legend-dot calm"></i>Menos movimiento</span>
+              <span class="schedule-legend-item" data-level="steady"><i class="legend-dot steady"></i>Movimiento medio</span>
+              <span class="schedule-legend-item" data-level="peak"><i class="legend-dot peak"></i>Más movimiento</span>
+            </div>
+            <p class="schedule-current-time" id="sched-time-weekend"></p>
+            <p class="schedule-movement-copy" id="sched-copy-weekend">Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.</p>
+            <p class="schedule-peak-window" id="sched-peak-weekend"></p>
+            <p class="sched-back-hint">◆ Click para volver</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div class="schedule-card-flip" data-aos="fade-up" data-aos-delay="200">
+        <div class="schedule-card-inner">
+          <div class="schedule-card-front">
+            <h3>Contacto</h3>
+            <p class="schedule-contact">Cta. de las Descargas, 6<br>28005 Madrid</p>
+            <p class="schedule-note">Centro de Madrid</p>
+            <p class="click-hint">◆ Click para ver info útil</p>
+          </div>
+          <div class="schedule-card-back">
+            <p class="schedule-back-title">Antes de venir</p>
+            <p class="schedule-directions">📲 Confirma disponibilidad por WhatsApp
+🪪 Trae documentación válida
+🕒 Ven con tiempo para disfrutar mejor</p>
+            <p class="sched-back-hint">◆ Click para volver</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRECIOS ========== -->
+<section id="precios" class="section prices dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Tarifas</h2>
+      <p class="section-subtitle">Tarifas claras para que elijas la opción que mejor encaja contigo</p>
+    </div>
+    
+    <h3 class="subsection-title" data-aos="fade-up">Entrada General</h3>
+    <p class="flip-hint">Haz click en las tarjetas para ver los detalles</p>
+    <div class="prices-grid">
+      <div class="price-card-flip" data-aos="flip-left" data-aos-delay="0">
+        <div class="price-card-inner">
+          <!-- FRENTE -->
+          <div class="price-card-front">
+            <div class="price-icon">🎫</div>
+            <h4>Entrada Diaria</h4>
+            <div class="price-amount">15€</div>
+            <p class="price-desc">Lunes a Viernes</p>
+            <p class="click-hint">◆ Click para ver detalles</p>
+          </div>
+          <!-- DORSO -->
+          <div class="price-card-back">
+            <div class="price-badge-back">Entrada</div>
+            <ul class="price-features">
+              <li>✓ Acceso general al local</li>
+              <li>✓ Válido de lunes a viernes</li>
+              <li>✓ Horario: 14:00-23:00</li>
+              <li>✓ Condiciones en recepción</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="price-card-flip featured" data-aos="flip-left" data-aos-delay="100">
+        <div class="price-card-inner">
+          <!-- FRENTE -->
+          <div class="price-card-front">
+            <div class="price-badge">Popular</div>
+            <div class="price-icon">🎉</div>
+            <h4>Entrada Fin de Semana</h4>
+            <div class="price-amount">16€</div>
+            <p class="price-desc">Sábados, Domingos y Festivos</p>
+            <p class="click-hint">◆ Click para ver detalles</p>
+          </div>
+          <!-- DORSO -->
+          <div class="price-card-back">
+            <div class="price-badge-back">Fin de Semana</div>
+            <ul class="price-features">
+              <li>✓ Válido sábados, domingos y festivos</li>
+              <li>✓ Horario: 14:00-23:00</li>
+              <li>✓ Acceso general al local</li>
+              <li>✓ Confirmar aforo por WhatsApp</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title" data-aos="fade-up">Masajes y Tratamientos</h3>
+    <div class="prices-grid">
+      <div class="price-card-flip" data-aos="flip-right" data-aos-delay="0">
+        <div class="price-card-inner">
+          <!-- FRENTE -->
+          <div class="price-card-front">
+            <div class="price-icon">💆</div>
+            <h4>Masaje Express</h4>
+            <div class="price-amount">30€</div>
+            <p class="price-desc">30 minutos</p>
+            <p class="click-hint">◆ Click para ver detalles</p>
+          </div>
+          <!-- DORSO -->
+          <div class="price-card-back">
+            <div class="price-badge-back">Express</div>
+            <ul class="price-features">
+              <li>✓ Duración: 30 minutos</li>
+              <li>✓ Servicio de masaje</li>
+              <li>✓ Reserva recomendada</li>
+              <li>✓ Condiciones en recepción</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="price-card-flip featured" data-aos="flip-right" data-aos-delay="100">
+        <div class="price-card-inner">
+          <!-- FRENTE -->
+          <div class="price-card-front">
+            <div class="price-badge">Recomendado</div>
+            <div class="price-icon">🌟</div>
+            <h4>Masaje Completo</h4>
+            <div class="price-amount">50€</div>
+            <p class="price-desc">1 hora</p>
+            <p class="click-hint">◆ Click para ver detalles</p>
+          </div>
+          <!-- DORSO -->
+          <div class="price-card-back">
+            <div class="price-badge-back">Completo</div>
+            <ul class="price-features">
+              <li>✓ Duración: 1 hora</li>
+              <li>✓ Servicio de masaje</li>
+              <li>✓ Reserva recomendada</li>
+              <li>✓ Condiciones en recepción</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="price-card-flip" data-aos="flip-right" data-aos-delay="200">
+        <div class="price-card-inner">
+          <!-- FRENTE -->
+          <div class="price-card-front">
+            <div class="price-icon">👥</div>
+            <h4>Masaje en Pareja</h4>
+            <div class="price-amount">90€</div>
+            <p class="price-desc">1 hora para dos</p>
+            <p class="click-hint">◆ Click para ver detalles</p>
+          </div>
+          <!-- DORSO -->
+          <div class="price-card-back">
+            <div class="price-badge-back">Pareja</div>
+            <ul class="price-features">
+              <li>✓ Duración: 1 hora para dos</li>
+              <li>✓ Servicio para dos personas</li>
+              <li>✓ Reserva previa recomendada</li>
+              <li>✓ Confirmar disponibilidad por WhatsApp</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MANIFIESTO DE MARCA ========== -->
+<section class="section manifesto dark-bg">
+  <div class="container">
+    <div class="manifesto-box" data-aos="zoom-in">
+      <p class="manifesto-kicker">SPT / Madrid centro</p>
+      <h2>Un lugar para bajar el ruido y recuperar tu energía.</h2>
+      <p>Creemos en el bienestar con discreción, en el respeto como principio y en una experiencia que se recuerda por cómo te hace sentir.</p>
+      <button class="btn btn-primary" type="button" data-action="open-whatsapp">Hablar por WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GALERÍA ========== -->
+<section id="galeria" class="section gallery">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Galería</h2>
+      <p class="section-subtitle">Explora nuestro espacio</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0" data-zone="sauna" data-src="assets/images/gallery-sauna.jpg" data-caption="Zona de sauna">
+        <img src="assets/images/gallery-sauna.jpg" alt="Sauna">
+        <div class="gallery-overlay">
+          <span class="gallery-zoom-icon">&#128269;</span>
+          <p>Zona de sauna</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100" data-zone="vapor" data-src="assets/images/gallery-vapor.jpg" data-caption="Baño de Vapor">
+        <img src="assets/images/gallery-vapor.jpg" alt="Baño de Vapor">
+        <div class="gallery-overlay">
+          <span class="gallery-zoom-icon">&#128269;</span>
+          <p>Baño de Vapor</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200" data-zone="jacuzzi" data-src="assets/images/gallery-jacuzzi.jpg" data-caption="Jacuzzi Relajante">
+        <img src="assets/images/gallery-jacuzzi.jpg" alt="Jacuzzi">
+        <div class="gallery-overlay">
+          <span class="gallery-zoom-icon">&#128269;</span>
+          <p>Jacuzzi Relajante</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300" data-zone="tratamientos" data-src="assets/images/gallery-tratamientos.jpg" data-caption="Tratamientos">
+        <img src="assets/images/gallery-tratamientos.jpg" alt="Masajes">
+        <div class="gallery-overlay">
+          <span class="gallery-zoom-icon">&#128269;</span>
+          <p>Tratamientos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIOS ========== -->
+<section class="section testimonials dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle">Experiencias reales de quienes nos visitan</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Un espacio tranquilo y con mucha discreción. Las instalaciones están muy cuidadas y el personal es amable y profesional. Sin duda volvería.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">J.M.</div>
+          <div>
+            <strong>J. Martínez</strong>
+            <span>Madrid</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&ldquo;Llevo tiempo viniendo y siempre me ha parecido un sitio limpio, cómodo y bien ubicado. La sauna y el jacuzzi están muy bien. Ambiente muy agradable.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R.G.</div>
+          <div>
+            <strong>R. Gómez</strong>
+            <span>Barcelona (visita Madrid)</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <p class="testimonial-text">&ldquo;Primera vez y la experiencia fue muy buena. Me recibieron bien, me explicaron todo y las instalaciones superaron mis expectativas. Zona bien comunicada también.&rdquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A.P.</div>
+          <div>
+            <strong>A. Pérez</strong>
+            <span>Madrid</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-form-wrap" data-aos="fade-up" data-aos-delay="350">
+      <h3 class="review-form-title">Deja tu reseña</h3>
+      <p class="review-form-subtitle">Comparte tu experiencia con otros clientes</p>
+      <form id="review-form" class="review-form">
+        <div class="review-form-grid">
+          <div class="form-group">
+            <label for="review-name">Nombre</label>
+            <input type="text" id="review-name" name="name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="review-lastname">Apellido</label>
+            <input type="text" id="review-lastname" name="lastname" placeholder="Tu apellido" required>
+          </div>
+        </div>
+
+        <div class="form-group rating-group">
+          <label>Calificacion</label>
+          <div class="star-rating" id="star-rating" aria-label="Calificacion por estrellas">
+            <button type="button" class="star" data-value="1" aria-label="1 estrella">&#9733;</button>
+            <button type="button" class="star" data-value="2" aria-label="2 estrellas">&#9733;</button>
+            <button type="button" class="star" data-value="3" aria-label="3 estrellas">&#9733;</button>
+            <button type="button" class="star" data-value="4" aria-label="4 estrellas">&#9733;</button>
+            <button type="button" class="star" data-value="5" aria-label="5 estrellas">&#9733;</button>
+          </div>
+          <input type="hidden" id="review-rating" name="rating" value="0" required>
+        </div>
+
+        <div class="form-group">
+          <label for="review-text">Tu reseña</label>
+          <textarea id="review-text" name="review" rows="5" placeholder="Escribe aqui tu experiencia..." maxlength="500" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary review-submit">Enviar reseña</button>
+        <p id="review-feedback" class="review-feedback" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="section faq dark-bg">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      <p class="section-subtitle">Información útil para preparar tu visita</p>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="0">
+        <div class="faq-question">
+          <h3>¿Cómo es mi primera visita?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Al llegar, presentas tu documentación en recepción, abonas la entrada y recibes tu llave de taquilla. El equipo te explica brevemente las zonas disponibles y las normas del local. A partir de ahí puedes moverte con total autonomía. Te recomendamos llegar con tiempo suficiente para instalarte con calma y disfrutar al máximo de las instalaciones.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="faq-question">
+          <h3>¿Qué debo llevar?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Es imprescindible llevar documentación oficial válida: DNI, NIE o pasaporte. No se permite el acceso sin identificación. Recomendamos también traer chanclas para el uso de zonas húmedas. La toalla está disponible en el local. Si tienes alguna duda sobre qué incluye exactamente tu entrada, puedes consultarlo en recepción al llegar o antes por WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="faq-question">
+          <h3>¿Hay normas de convivencia?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>El respeto mutuo es la base de todo. Está absolutamente prohibido fotografiar o grabar en cualquier zona del local. Es obligatorio ducharse antes de acceder a las zonas húmedas y usar la toalla sobre cualquier superficie. Cualquier interacción requiere consentimiento explícito. El personal está presente para garantizar la convivencia: si presencias o vives alguna situación incómoda, puedes acudir a recepción en cualquier momento.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="faq-question">
+          <h3>¿Cuál es vuestra política de desinfección?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Las instalaciones se limpian y desinfectan de forma periódica a lo largo del día. El uso de toalla sobre las superficies es obligatorio. Se exige ducha antes de acceder a la sauna, jacuzzi y piscina. Disponemos de productos de higiene en los aseos. Si tienes necesidades específicas o quieres más información, puedes consultarlo por WhatsApp antes de tu visita.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="faq-question">
+          <h3>¿Aceptáis grupos?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Sí, se admiten grupos, aunque recomendamos avisar con antelación para asegurar comodidad para todos. En días o franjas de mayor afluencia puede haber limitación de aforo. Consúltanos por WhatsApp indicando el número aproximado de personas y la franja horaria deseada; te confirmamos disponibilidad y condiciones.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+        <div class="faq-question">
+          <h3>¿Aceptáis parejas heterosexuales?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Sauna Puerta de Toledo es un espacio orientado al público masculino. Para cualquier consulta específica sobre condiciones de acceso, escríbenos por WhatsApp antes de tu visita y te respondemos con toda la información actualizada. Queremos asegurarnos de que tu experiencia sea cómoda desde el primer momento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACTO & UBICACIÓN ========== -->
+<section id="contacto" class="section contact">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Ubicación & Contacto</h2>
+      <p class="section-subtitle">Estamos en Madrid centro, con acceso cómodo en transporte público</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card" data-aos="fade-up" data-aos-delay="0">
+        <h3>📍 Dirección</h3>
+        <p>Cuesta de las Descargas, 6<br>28005 Madrid, España</p>
+        <p class="contact-note">Centro de Madrid, junto a Puerta de Toledo</p>
+      </div>
+      <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>🚇 Cómo llegar</h3>
+        <p>Puerta de Toledo / La Latina<br>Acceso rápido desde el centro</p>
+        <p class="contact-note">Zona bien conectada en Metro y bus</p>
+      </div>
+      <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>📱 Contacto</h3>
+        <button class="btn btn-primary" type="button" data-action="open-whatsapp">WhatsApp</button>
+        <p><a href="https://www.instagram.com/saunapuertadetoledo/" target="_blank" class="social-link">Instagram</a></p>
+      </div>
+    </div>
+    
+    <!-- Mapa Google -->
+    <div class="map-container" data-aos="fade-up" data-aos-delay="300">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.2983860147974!2d-3.7123082845767356!3d40.408029679365176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42262c04cde7e5%3A0x225e374eb7ac06b9!2sCta.%20de%20las%20Descargas%2C%206%2C%2028005%20Madrid!5e0!3m2!1ses!2ses!4v1717047210531" width="100%" height="400" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Sauna Puerta de Toledo</h4>
+        <p>Espacio de bienestar y encuentro en Madrid centro.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Síguenos</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/saunapuertadetoledo" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://twitter.com/saunapuerta" target="_blank" aria-label="Twitter">𝕏</a>
+          <a href="https://www.instagram.com/saunapuertadetoledo/" target="_blank" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sauna Puerta de Toledo. Todos los derechos reservados.</p>
+      <div class="footer-links">
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Aviso Legal</a>
+        <a href="#">Política de Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== LIGHTBOX ========== -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <button class="lightbox-prev" id="lightbox-prev" aria-label="Anterior">&#10094;</button>
+  <button class="lightbox-next" id="lightbox-next" aria-label="Siguiente">&#10095;</button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+</div>
+
+<!-- ========== BANNER COOKIES ========== -->
+<div id="cookie-banner" class="cookie-banner" role="alertdialog" aria-describedby="cookie-desc">
+  <div class="cookie-content">
+    <p id="cookie-desc">&#127850; Utilizamos cookies propias para mejorar la experiencia de navegación. Al continuar navegando aceptas su uso. <a href="#" class="cookie-link">Política de cookies</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn btn-secondary cookie-decline" type="button">Solo esenciales</button>
+      <button class="btn btn-primary cookie-accept" type="button">Aceptar todas</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== BOTÓN WHATSAPP FLOTANTE ========== -->
+<a href="#" id="whatsapp-btn" class="whatsapp-btn" data-action="open-whatsapp" title="Chat por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.252 0-2.493.397-3.534 1.14l-.355.236-.267.159-3.971 1.48 1.505-3.883.15-.365.088-.228c.818-1.318 2.26-2.127 3.784-2.127 1.025 0 1.986.308 2.821.893l.26.169.265.173c1.49 1.032 2.54 2.668 2.54 4.55 0 .373-.026.743-.082 1.106l-.025.204-.018.229v.005c-.032.306-.15.562-.298.76"/>
+  </svg>
+</a>
+
+<!-- ========== SCROLL TO TOP ========== -->
+<button id="scroll-top-btn" class="scroll-top-btn" type="button">↑</button>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
+
+

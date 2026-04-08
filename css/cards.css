@@ -1,0 +1,741 @@
+/* ========== CARDS CSS ========== */
+
+/* Precio Cards */
+
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+}
+
+/* Hint text */
+.flip-hint {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* ========== FLIP CARDS ========== */
+
+.price-card-flip {
+  perspective: 1000px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.price-card-flip .price-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-style: preserve-3d;
+  min-height: 350px;
+}
+
+.price-card-flip.flipped .price-card-inner {
+  transform: rotateY(180deg);
+}
+
+.price-card-front,
+.price-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  border-radius: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  overflow: hidden;
+}
+
+.price-card-front::after,
+.price-card-back::after {
+  content: '';
+  position: absolute;
+  top: -120%;
+  left: -50%;
+  width: 50%;
+  height: 300%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.16), transparent);
+  transform: rotate(20deg);
+  transition: left 0.8s ease;
+}
+
+.price-card-front {
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(212,175,55,0.05) 100%);
+  backdrop-filter: blur(10px);
+  color: var(--text-light);
+  z-index: 2;
+}
+
+.price-card-back {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 100%);
+  backdrop-filter: blur(10px);
+  color: var(--text-light);
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.price-card-front .price-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.price-card-front h4 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.price-card-front .price-amount {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+}
+
+.price-card-front .price-desc {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.click-hint {
+  font-size: 12px;
+  color: #777;
+  margin-top: 15px;
+  font-style: italic;
+  animation: pulse 2s infinite;
+}
+
+/* Back side styling */
+.price-card-back .price-badge-back {
+  background: var(--primary);
+  color: var(--dark);
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.price-card-back .price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.price-card-back .price-features li {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Featured cards */
+.price-card-flip.featured .price-card-front {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 12px 34px rgba(212, 175, 55, 0.22);
+}
+
+.price-card-flip.featured .price-card-back {
+  background: linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.15) 100%);
+  border-color: var(--primary);
+}
+
+/* Hover effects */
+.price-card-flip:hover .price-card-front {
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.28);
+  border-color: var(--primary);
+  transform: translateY(-6px);
+}
+
+.price-card-flip:hover .price-card-back {
+  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.28);
+  transform: rotateY(180deg) translateY(-6px);
+}
+
+.price-card-flip:hover .price-card-front::after,
+.price-card-flip:hover .price-card-back::after {
+  left: 130%;
+}
+
+
+
+.price-card {
+  /* Estilos antiguos - reemplazados por .price-card-flip */
+  display: none;
+}
+
+.price-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary);
+  color: var(--dark);
+  padding: 8px 20px;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 0 15px 0 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.price-icon {
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+.price-card h4 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.price-amount {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 15px 0;
+  font-family: 'Playfair Display', serif;
+}
+
+.price-desc {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 25px;
+}
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.price-features li {
+  font-size: 14px;
+  color: #bbb;
+  line-height: 1.6;
+}
+
+.price-card-flip .btn,
+.price-card .btn {
+  margin-top: auto;
+}
+
+/* Glassmorphism effect */
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* Hover effects */
+
+.card-hover-lift {
+  transition: all 0.3s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover-scale {
+  transition: all 0.3s ease;
+}
+
+.card-hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.card-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.card-hover-glow:hover {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+/* ========== SCHEDULE FLIP CARDS ========== */
+
+.schedule-card-flip {
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  min-height: 230px;
+}
+
+.schedule-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-style: preserve-3d;
+}
+
+.schedule-card-flip.flipped .schedule-card-inner {
+  transform: rotateY(180deg);
+}
+
+.schedule-card-front,
+.schedule-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 36px 30px;
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  background: linear-gradient(180deg, rgba(25, 22, 18, 0.96) 0%, rgba(18, 15, 12, 0.94) 100%);
+  backdrop-filter: blur(14px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.schedule-card-front::before,
+.schedule-card-back::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(212,175,55,0.16), transparent 42%);
+  pointer-events: none;
+}
+
+.schedule-card-front {
+  color: #f3ede2;
+  z-index: 2;
+}
+
+.schedule-card-front h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: #f2d796;
+  font-weight: 600;
+}
+
+.schedule-card-flip:hover .schedule-card-front {
+  border-color: rgba(212, 175, 55, 0.38);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateY(-4px);
+}
+
+.schedule-card-back {
+  background: linear-gradient(180deg, rgba(28, 24, 19, 0.98) 0%, rgba(20, 17, 14, 0.96) 100%);
+  border-color: rgba(212,175,55,0.22);
+  color: #f3ede2;
+  transform: rotateY(180deg);
+  z-index: 1;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 30px 30px;
+}
+
+.schedule-back-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #e7c979;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  margin-bottom: 0;
+  align-self: flex-start;
+}
+
+.schedule-status-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  align-self: flex-start;
+}
+
+.schedule-status-badge.calm {
+  background: rgba(164, 143, 111, 0.16);
+  color: #d9c4a0;
+  border: 1px solid rgba(164, 143, 111, 0.28);
+}
+
+.schedule-status-badge.steady {
+  background: rgba(194, 151, 53, 0.18);
+  color: #efd082;
+  border: 1px solid rgba(194, 151, 53, 0.3);
+}
+
+.schedule-status-badge.peak {
+  background: rgba(233, 203, 117, 0.2);
+  color: #fff0c4;
+  border: 1px solid rgba(233, 203, 117, 0.34);
+}
+
+.schedule-status-badge.off {
+  background: rgba(115, 104, 88, 0.22);
+  color: #c7b8a1;
+  border: 1px solid rgba(115, 104, 88, 0.28);
+}
+
+.schedule-prog-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.schedule-prog-label {
+  font-size: 11px;
+  color: #b9ab95;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.schedule-prog-track {
+  flex: 1;
+  height: 14px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(233, 203, 117, 0.14);
+  box-shadow: inset 0 1px 6px rgba(0,0,0,0.28);
+}
+
+.schedule-prog-band {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+
+.schedule-prog-band.weekday {
+  background: linear-gradient(
+    90deg,
+    rgba(128, 103, 70, 0.42) 0%,
+    rgba(128, 103, 70, 0.42) 26%,
+    rgba(176, 131, 54, 0.58) 26%,
+    rgba(176, 131, 54, 0.58) 56%,
+    rgba(230, 195, 109, 0.9) 56%,
+    rgba(230, 195, 109, 0.9) 80%,
+    rgba(166, 126, 57, 0.5) 80%,
+    rgba(166, 126, 57, 0.5) 100%
+  );
+}
+
+.schedule-prog-band.weekend {
+  background: linear-gradient(
+    90deg,
+    rgba(170, 126, 52, 0.5) 0%,
+    rgba(170, 126, 52, 0.5) 18%,
+    rgba(220, 183, 96, 0.78) 18%,
+    rgba(220, 183, 96, 0.78) 46%,
+    rgba(243, 212, 138, 0.95) 46%,
+    rgba(243, 212, 138, 0.95) 82%,
+    rgba(193, 149, 62, 0.54) 82%,
+    rgba(193, 149, 62, 0.54) 100%
+  );
+}
+
+.schedule-prog-marker {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f7e3a7;
+  border: 2px solid rgba(38, 30, 21, 0.82);
+  box-shadow: 0 0 0 3px rgba(247, 227, 167, 0.18), 0 0 14px rgba(247, 227, 167, 0.3);
+  transition: left 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  margin-left: -6px;
+  z-index: 2;
+}
+
+.schedule-prog-marker::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 38px;
+  background: linear-gradient(180deg, rgba(247,227,167,0.8), rgba(247,227,167,0.08));
+}
+
+.schedule-prog-marker.hidden {
+  opacity: 0;
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  width: 100%;
+  align-items: center;
+}
+
+.schedule-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #c9baa2;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.legend-dot.calm {
+  background: #8b6c49;
+}
+
+.legend-dot.steady {
+  background: #c4953f;
+}
+
+.legend-dot.peak {
+  background: #f0d184;
+}
+
+.schedule-legend-item.legend-active {
+  color: #ffe97a;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 233, 120, 0.5);
+}
+
+.schedule-legend-item.legend-active .legend-dot {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px rgba(240, 209, 132, 0.6), 0 0 12px rgba(240, 209, 132, 0.55);
+}
+
+.legend-dot {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.schedule-prog-highlight {
+  position: absolute;
+  top: -7px;
+  height: calc(100% + 14px);
+  border-radius: 8px;
+  background: rgba(255, 233, 120, 0.22);
+  border: 2px solid rgba(255, 233, 120, 0.85);
+  box-shadow: 0 0 0 3px rgba(255, 233, 120, 0.15),
+              0 0 18px rgba(255, 233, 120, 0.5),
+              0 0 40px rgba(255, 233, 120, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, left 0.25s ease, width 0.25s ease;
+  z-index: 1;
+}
+
+.schedule-prog-highlight.active {
+  opacity: 1;
+  animation: highlight-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes highlight-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(255,233,120,0.15), 0 0 18px rgba(255,233,120,0.5), 0 0 40px rgba(255,233,120,0.22); }
+  50%       { box-shadow: 0 0 0 5px rgba(255,233,120,0.25), 0 0 28px rgba(255,233,120,0.75), 0 0 60px rgba(255,233,120,0.35); }
+}
+
+.schedule-current-time {
+  font-size: 12px;
+  color: #c6b49a;
+  line-height: 1.5;
+  align-self: flex-start;
+}
+
+.schedule-movement-copy {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e2d5bc;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.schedule-peak-window {
+  font-size: 12px;
+  color: #f0cf80;
+  line-height: 1.5;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.schedule-directions {
+  font-size: 14px;
+  line-height: 2.2;
+  color: #dfd0ba;
+  white-space: pre-line;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.sched-back-hint {
+  font-size: 11px;
+  color: #9b8a73;
+  margin-top: auto;
+  font-style: italic;
+}
+
+/* Border animation */
+
+.card-border-animation {
+  position: relative;
+  background: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+}
+
+.card-border-animation::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-border-animation:hover::before {
+  opacity: 0.3;
+}
+
+/* Card with icon */
+
+.card-with-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.card-with-icon .icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  font-size: 40px;
+  transition: all 0.3s ease;
+}
+
+.card-with-icon:hover .icon {
+  background: rgba(212, 175, 55, 0.2);
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Expandable card */
+
+.expandable-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.expandable-card.expanded {
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.expandable-card .card-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expandable-card .card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.expandable-card.expanded .card-body {
+  max-height: 500px;
+  padding: 0 20px 20px;
+}
+
+/* Testimonial Card */
+
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 30px;
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #bbb;
+  margin-bottom: 15px;
+}
+
+.testimonial-card .author {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Stats Card */
+
+.stats-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.stats-card .number {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+}
+
+.stats-card .label {
+  font-size: 14px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

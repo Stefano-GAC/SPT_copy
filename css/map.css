@@ -1,0 +1,60 @@
+.map-title {
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 60px 0 40px; /* 60px arriba, 0 a los lados, 40px abajo */
+  color: #b30000;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+
+.map-link-wrapper {
+  text-decoration: none;
+  display: block;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.map-contact-container {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.map-embed {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(40%) brightness(90%);
+}
+
+.contact-card {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: rgba(179, 0, 0, 0.95); /* Rojo oscuro */
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  width: 280px;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 2;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.contact-card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.contact-card p {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}

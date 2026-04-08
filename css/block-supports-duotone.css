@@ -1,0 +1,3 @@
+
+:root{--wp--preset--duotone--grayscale:url(#wp-duotone-grayscale);}
+.wp-duotone-unset-4.wp-block-cover > .wp-block-cover__image-background, .wp-duotone-unset-4.wp-block-cover > .wp-block-cover__video-background{filter:unset;}.wp-duotone-grayscale.wp-block-image img, .wp-duotone-grayscale.wp-block-image .components-placeholder{filter:var(--wp--preset--duotone--grayscale);}
