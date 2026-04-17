@@ -197,6 +197,25 @@
     line-height: 1.55;
   }
 
+  .dark-bg .section-subtitle,
+  .dark-bg .section-header p,
+  .price-card-front .price-desc,
+  .price-card-back .price-features li,
+  .flip-hint,
+  .click-hint,
+  .schedule-note,
+  .faq-answer p,
+  .health-card p,
+  .contact-card p,
+  .footer-section p,
+  .footer-section a {
+    color: rgba(255, 255, 255, 0.94);
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .prices-grid,
   .facilities-grid,
   .gallery-grid,
@@ -470,6 +489,25 @@
 
   .section-subtitle {
     font-size: 16px;
+  }
+
+  .dark-bg .section-subtitle,
+  .dark-bg .section-header p,
+  .price-card-front .price-desc,
+  .price-card-back .price-features li,
+  .flip-hint,
+  .click-hint,
+  .schedule-note,
+  .faq-answer p,
+  .health-card p,
+  .contact-card p,
+  .footer-section p,
+  .footer-section a {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.92);
   }
 
   .experience-chips {
