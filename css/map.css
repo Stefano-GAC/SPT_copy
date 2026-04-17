@@ -1,5 +1,5 @@
 .map-title {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
@@ -41,7 +41,7 @@
   padding: 25px 30px;
   border-radius: 16px;
   width: 280px;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   z-index: 2;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }

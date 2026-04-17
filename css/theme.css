@@ -1,6 +1,7 @@
 /* ========== THEME CSS - Paleta Oscura Sensual ========== */
 
 :root {
+  --font-primary: 'Cormorant Garamond', serif;
   --primary: #d4af37;        /* Dorado */
   --primary-dark: #b8941f;   /* Dorado oscuro */
   --accent: #c1272d;         /* Rojo vino */
@@ -15,9 +16,27 @@
 }
 
 body {
+  font-family: var(--font-primary);
   background: #fff;
   color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.75;
   transition: background 0.3s ease;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
 }
 
 body::before {
@@ -75,7 +94,7 @@ body > * {
   font-size: 22px;
   font-weight: 800;
   color: var(--primary);
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   padding: 0;
   border-radius: 50%;
   border: none;
@@ -152,25 +171,42 @@ body > * {
   gap: 12px;
 }
 
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .language-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   color: var(--primary);
   border: 1px solid rgba(212, 175, 55, 0.45);
   border-radius: 999px;
   height: 36px;
-  min-width: 56px;
-  padding: 0 14px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  text-transform: uppercase;
+  width: 42px;
+  min-width: 42px;
+  padding: 0;
   cursor: pointer;
   transition: all 0.25s ease;
+}
+
+.language-toggle .fi {
+  font-size: 17px;
+  line-height: 1;
 }
 
 .language-toggle:hover {
   background: rgba(212, 175, 55, 0.14);
   border-color: var(--primary);
+}
+
+.language-toggle[aria-pressed="true"] {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.22);
 }
 
 .cta-btn {
@@ -340,10 +376,11 @@ body > * {
 }
 
 .hero-subtitle {
-  font-size: 24px;
+  font-size: 28px;
   color: #ddd;
   margin-bottom: 40px;
-  font-weight: 300;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .hero-ctas {
@@ -401,35 +438,100 @@ body > * {
 /* ========== BOTONES ========== */
 
 .btn {
-  padding: 15px 35px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
-  border: 2px solid transparent;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+@keyframes shimmer-flow {
+  0% {
+    left: -30%;
+  }
+  50% {
+    left: 125%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: -120%;
+  left: -30%;
+  width: 45%;
+  height: 320%;
+  transform: rotate(18deg);
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: none;
+  z-index: 1;
+}
+
+.btn:hover::before {
+  animation: shimmer-flow 0.7s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+.btn:active {
+  animation: pulse-glow 0.6s ease-out;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.32), 0 10px 26px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: var(--dark);
+  color: #1a1a1a;
+  border-color: rgba(255, 239, 182, 0.58);
+  background: linear-gradient(135deg, #f4d67f 0%, #d7a92d 46%, #b88918 100%);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(212, 175, 55, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  background: linear-gradient(135deg, #f8e2a0 0%, #ddb440 46%, #bd901e 100%);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border-color: var(--primary);
+  color: #f2d68b;
+  border-color: rgba(212, 175, 55, 0.58);
+  background: linear-gradient(140deg, rgba(26, 26, 26, 0.86), rgba(16, 16, 16, 0.92));
 }
 
 .btn-secondary:hover {
-  background: var(--primary);
-  color: var(--dark);
+  transform: translateY(-4px) scale(1.02);
+  color: #fff1bf;
+  border-color: rgba(245, 220, 136, 0.84);
+  background: linear-gradient(140deg, rgba(38, 30, 18, 0.95), rgba(22, 18, 12, 0.98));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34), 0 0 32px rgba(212, 175, 55, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 /* ========== SECCIONES ========== */
@@ -456,9 +558,10 @@ body > * {
 }
 
 .section-subtitle {
-  font-size: 18px;
+  font-size: 22px;
   color: #666;
-  font-weight: 300;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .dark-bg {
@@ -527,11 +630,12 @@ body > * {
   color: var(--text-light);
   margin-bottom: 12px;
   font-size: 30px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
 }
 
 .experience-panel p {
   color: rgba(255,255,255,0.72);
+  font-size: 21px;
   max-width: 620px;
   margin: 0 auto 20px;
   line-height: 1.8;
@@ -574,6 +678,7 @@ body > * {
 
 .journey-step p {
   color: #5a5248;
+  font-size: 20px;
   line-height: 1.8;
 }
 
@@ -673,11 +778,12 @@ body > * {
   color: var(--text-light);
   margin-bottom: 12px;
   font-size: 26px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
 }
 
 .tour-info p {
   color: rgba(255,255,255,0.72);
+  font-size: 20px;
   line-height: 1.8;
 }
 
@@ -777,6 +883,7 @@ body > * {
 
 .real-question-card p {
   color: #5d5449;
+  font-size: 19px;
   line-height: 1.8;
 }
 
@@ -822,6 +929,7 @@ body > * {
 
 .manifesto-box p {
   color: rgba(255,255,255,0.72);
+  font-size: 21px;
   max-width: 640px;
   margin: 0 auto 28px;
   line-height: 1.9;
@@ -920,6 +1028,16 @@ body.saturday-event .whatsapp-btn {
 .card-icon {
   font-size: 50px;
   margin-bottom: 20px;
+  color: var(--primary);
+}
+
+.card-icon i,
+.facility-icon i,
+.price-icon i,
+.social-icons a i,
+.scroll-top-btn i {
+  display: inline-flex;
+  line-height: 1;
 }
 
 .about-card h3 {
@@ -930,6 +1048,7 @@ body.saturday-event .whatsapp-btn {
 
 .about-card p {
   color: #666;
+  font-size: 19px;
   line-height: 1.8;
 }
 
@@ -961,6 +1080,7 @@ body.saturday-event .whatsapp-btn {
 .facility-icon {
   font-size: 45px;
   margin-bottom: 20px;
+  color: var(--primary);
 }
 
 .facility-card h3 {
@@ -970,7 +1090,7 @@ body.saturday-event .whatsapp-btn {
 }
 
 .facility-card p {
-  font-size: 14px;
+  font-size: 18px;
   color: #bbb;
   line-height: 1.6;
 }
@@ -1012,17 +1132,18 @@ body.saturday-event .whatsapp-btn {
   font-weight: 800;
   color: var(--primary);
   margin-bottom: 10px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
 }
 
 .schedule-note {
-  font-size: 13px;
+  font-size: 17px;
   color: #aaa;
   margin-top: 15px;
+  line-height: 1.5;
 }
 
 .schedule-contact {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.8;
   margin-bottom: 10px;
   color: var(--primary);
@@ -1122,7 +1243,7 @@ body.saturday-event .whatsapp-btn {
 .faq-question h3 {
   margin: 0;
   font-size: 17px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   font-weight: 600;
   color: var(--text-light);
   line-height: 1.4;
@@ -1173,8 +1294,8 @@ body.saturday-event .whatsapp-btn {
 .faq-answer-inner p {
   margin: 20px 0 0;
   color: rgba(255,255,255,0.68);
+  font-size: 18px;
   line-height: 1.9;
-  font-size: 15px;
   opacity: 0;
   transform: translateY(-6px);
   transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
@@ -1216,6 +1337,7 @@ body.saturday-event .whatsapp-btn {
 
 .health-card p {
   color: #bbb;
+  font-size: 18px;
   line-height: 1.6;
 }
 
@@ -1245,18 +1367,47 @@ body.saturday-event .whatsapp-btn {
 }
 
 .contact-card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   font-size: 20px;
   margin-bottom: 15px;
   color: var(--primary);
 }
 
+.contact-card h3 i {
+  display: inline-flex;
+  line-height: 1;
+}
+
+.schedule-directions {
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+
+.schedule-directions span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schedule-directions i {
+  color: var(--primary);
+  display: inline-flex;
+  line-height: 1;
+}
+
 .contact-card p {
   color: #bbb;
+  font-size: 18px;
+  line-height: 1.65;
   margin-bottom: 10px;
 }
 
 .contact-note {
-  font-size: 13px;
+  font-size: 16px;
   color: #888 !important;
 }
 
@@ -1301,7 +1452,7 @@ body.saturday-event .whatsapp-btn {
 }
 
 .footer-section p {
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.8;
 }
 
@@ -1316,7 +1467,7 @@ body.saturday-event .whatsapp-btn {
 .footer-section a {
   color: #999;
   transition: color 0.3s ease;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .footer-section a:hover {
@@ -1341,6 +1492,10 @@ body.saturday-event .whatsapp-btn {
   font-weight: bold;
 }
 
+.social-icons a i {
+  font-size: 18px;
+}
+
 .social-icons a:hover {
   background: var(--primary);
   color: var(--dark);
@@ -1352,7 +1507,7 @@ body.saturday-event .whatsapp-btn {
   align-items: center;
   padding-top: 30px;
   border-top: 1px solid var(--border);
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .footer-links {
@@ -1395,7 +1550,10 @@ body.saturday-event .whatsapp-btn {
   animation: none;
 }
 
+.whatsapp-btn i,
 .whatsapp-btn svg {
+  display: block;
+  font-size: 32px;
   width: 32px;
   height: 32px;
 }
@@ -1432,6 +1590,10 @@ body.saturday-event .whatsapp-btn {
   font-weight: bold;
 }
 
+.scroll-top-btn i {
+  font-size: 20px;
+}
+
 .scroll-top-btn.show {
   display: flex;
 }
@@ -1449,7 +1611,7 @@ body.saturday-event .whatsapp-btn {
   margin-top: 60px;
   margin-bottom: 40px;
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   font-weight: 700;
 }
 
@@ -1512,7 +1674,7 @@ body.saturday-event .whatsapp-btn {
 }
 
 .loader-logo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   font-size: 64px;
   font-weight: 900;
   color: var(--primary);
@@ -1578,7 +1740,7 @@ body.saturday-event .whatsapp-btn {
   position: absolute;
   top: 16px;
   left: 24px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   font-size: 72px;
   color: var(--primary);
   opacity: 0.18;
@@ -1664,7 +1826,7 @@ body.saturday-event .whatsapp-btn {
 
 .review-form-title {
   color: var(--text-light);
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-primary);
   font-size: 28px;
   margin-bottom: 8px;
 }
@@ -1952,7 +2114,7 @@ body.saturday-event .whatsapp-btn {
   flex-shrink: 0;
 }
 
-.btn-secondary {
+.cookie-actions .btn-secondary {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.6);
@@ -1964,7 +2126,7 @@ body.saturday-event .whatsapp-btn {
   white-space: nowrap;
 }
 
-.btn-secondary:hover {
+.cookie-actions .btn-secondary:hover {
   border-color: rgba(255,255,255,0.5);
   color: #fff;
 }

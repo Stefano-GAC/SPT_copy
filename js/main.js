@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollProgress();
   initLightbox();
   initCookieBanner();
-  initReviewForm();
   initLanguageToggle();
   initExperienceMode();
   initVisitTour();
@@ -147,19 +146,18 @@ function initFAQ() {
 // ========== Flip Cards ==========
 function initFlipCards() {
   const flipCards = document.querySelectorAll('.price-card-flip');
+  const touchMode = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (!touchMode) return;
 
   flipCards.forEach(card => {
     card.addEventListener('click', function(e) {
-      // Evitar que otros elementos dentro de la tarjeta causen el flip
       if (e.target.closest('button, a')) {
         return;
       }
-      
-      this.classList.toggle('flipped');
-    });
 
-    // Cerrar otros flip cards cuando se abre uno
-    card.addEventListener('click', function() {
+      this.classList.toggle('flipped');
+
       const siblingCards = document.querySelectorAll('.price-card-flip');
       siblingCards.forEach(sibling => {
         if (sibling !== this && sibling.parentElement === this.parentElement) {
@@ -315,12 +313,20 @@ function initScheduleCards() {
     });
   }
 
+  const touchMode = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   document.querySelectorAll('.schedule-card-flip').forEach(card => {
-    card.addEventListener('click', function() {
-      const goingToBack = !this.classList.contains('flipped');
-      this.classList.toggle('flipped');
-      if (goingToBack) updateCards();
-    });
+    if (touchMode) {
+      card.addEventListener('click', function() {
+        const goingToBack = !this.classList.contains('flipped');
+        this.classList.toggle('flipped');
+        if (goingToBack) updateCards();
+      });
+    } else {
+      card.addEventListener('mouseenter', function() {
+        updateCards();
+      });
+    }
   });
 
   // Legend zone highlight on click
@@ -414,9 +420,13 @@ function initMobileMenu() {
   const navMenu = document.querySelector('.nav-menu');
 
   if (menuToggle && navMenu) {
+    menuToggle.setAttribute('aria-expanded', 'false');
+
     menuToggle.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
+      const isOpen = navMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', isOpen);
     });
   }
 
@@ -426,7 +436,18 @@ function initMobileMenu() {
     link.addEventListener('click', function() {
       if (navMenu) navMenu.classList.remove('active');
       if (menuToggle) menuToggle.classList.remove('active');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
     });
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      if (navMenu) navMenu.classList.remove('active');
+      if (menuToggle) menuToggle.classList.remove('active');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
   });
 }
 
@@ -468,7 +489,7 @@ function getStaticTranslations(lang) {
       nav_about: 'About Us',
       nav_facilities: 'Facilities',
       nav_hours: 'Hours',
-      nav_prices: 'Prices',
+      nav_prices: 'Rates',
       nav_faq: 'FAQ',
       nav_book: 'Book'
     } : {
@@ -476,15 +497,15 @@ function getStaticTranslations(lang) {
       nav_about: 'Sobre Nosotros',
       nav_facilities: 'Instalaciones',
       nav_hours: 'Horarios',
-      nav_prices: 'Precios',
+      nav_prices: 'Tarifas',
       nav_faq: 'FAQ',
       nav_book: 'Reservar'
     },
     toggle: isEn ? {
-      label: 'ES',
+      iconClass: 'fi fi-es',
       aria: 'Switch language to Spanish'
     } : {
-      label: 'EN',
+      iconClass: 'fi fi-gb',
       aria: 'Cambiar idioma a ingles'
     },
     title: isEn ? 'Sauna Puerta de Toledo - Your Private Space in Madrid' : 'Sauna Puerta de Toledo - Tu Espacio Intimo en Madrid',
@@ -504,7 +525,7 @@ function getStaticTranslations(lang) {
       '.hero-ctas .btn-secondary': 'Ask on WhatsApp',
       '.experience-mode .section-title': 'Choose your experience',
       '.experience-mode .section-subtitle': 'Adapt the visit to how you want to feel today',
-      '#experience-chips .chip[data-mode="relax"]': 'Relax',
+      '#experience-chips .chip[data-mode="relax"]': 'Relaxation',
       '#experience-chips .chip[data-mode="social"]': 'Social',
       '#experience-chips .chip[data-mode="massage"]': 'Massage',
       '.journey .section-title': 'A visit in 3 moments',
@@ -589,8 +610,6 @@ function getStaticTranslations(lang) {
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-badge': 'Recommended',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Full Massage',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': '1 hour',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-front h4': 'Couples Massage',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-front .price-desc': '1 hour for two',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Express',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duration: 30 minutes',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Massage service',
@@ -601,15 +620,10 @@ function getStaticTranslations(lang) {
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Massage service',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ Recommended reservation',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Conditions at reception',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-badge-back': 'Couple',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(1)': '✓ Duration: 1 hour for two',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(2)': '✓ Service for two people',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(3)': '✓ Advance booking recommended',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(4)': '✓ Confirm availability on WhatsApp',
       '.price-card-front .click-hint': '◆ Click to see details',
       '.manifesto-kicker': 'SPT / Central Madrid',
       '.manifesto-box h2': 'A place to lower the noise and recover your energy.',
-      '.manifesto-box p': 'We believe in wellbeing with discretion, respect as a principle, and an experience remembered by how it makes you feel.',
+      '.manifesto-box > p:not(.manifesto-kicker)': 'We believe in wellbeing with discretion, respect as a principle, and an experience remembered by how it makes you feel.',
       '.manifesto-box .btn': 'Chat on WhatsApp',
       '#galeria .section-title': 'Gallery',
       '#galeria .section-subtitle': 'Explore our space',
@@ -617,18 +631,6 @@ function getStaticTranslations(lang) {
       '.gallery-item[data-zone="vapor"] .gallery-overlay p': 'Steam bath',
       '.gallery-item[data-zone="jacuzzi"] .gallery-overlay p': 'Relaxing jacuzzi',
       '.gallery-item[data-zone="tratamientos"] .gallery-overlay p': 'Treatments',
-      '.testimonials .section-title': 'What our clients say',
-      '.testimonials .section-subtitle': 'Real experiences from our visitors',
-      '.testimonial-card:nth-child(1) .testimonial-text': '"A calm and very discreet space. Facilities are well maintained and staff is friendly and professional. I would definitely come back."',
-      '.testimonial-card:nth-child(2) .testimonial-text': '"I have been coming for some time and it is always clean, comfortable and well located. Sauna and jacuzzi are great. Very pleasant atmosphere."',
-      '.testimonial-card:nth-child(3) .testimonial-text': '"First time and the experience was very good. They welcomed me well, explained everything and facilities exceeded expectations. Also easy to reach."',
-      '.review-form-title': 'Leave your review',
-      '.review-form-subtitle': 'Share your experience with other visitors',
-      'label[for="review-name"]': 'Name',
-      'label[for="review-lastname"]': 'Last name',
-      '.rating-group > label': 'Rating',
-      'label[for="review-text"]': 'Your review',
-      '.review-submit': 'Send review',
       '#faq .section-title': 'Frequently Asked Questions',
       '#faq .section-subtitle': 'Useful information to prepare your visit',
       '#faq .faq-item:nth-child(1) .faq-question h3': 'How is my first visit?',
@@ -724,9 +726,11 @@ function getStaticTranslations(lang) {
       '#horarios .section-title': 'Horarios',
       '#horarios .section-subtitle': 'Horario actual: todos los dias de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.',
       '#horarios .flip-hint': 'Haz click en las tarjetas para ver el nivel de movimiento por franja',
+        '#horarios .flip-hint': 'Hover over or tap the cards to see the activity level by time slot.',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Lunes a Jueves',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'Ritmo mas relajado',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
+        '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Movimiento estimado',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
@@ -734,6 +738,7 @@ function getStaticTranslations(lang) {
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front h3': 'Viernes a Domingo',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .schedule-note': 'Mas ambiente social',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
+        '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Movimiento estimado',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
@@ -741,12 +746,19 @@ function getStaticTranslations(lang) {
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front h3': 'Contacto',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .schedule-note': 'Centro de Madrid',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Click para ver info util',
+        '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Hover or tap to see useful info',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-back-title': 'Antes de venir',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-directions': '📲 Confirma disponibilidad por WhatsApp\n🪪 Trae documentacion valida\n🕒 Ven con tiempo para disfrutar mejor',
       '#precios .section-title': 'Tarifas',
-      '#precios .section-subtitle': 'Tarifas claras para que elijas la opcion que mejor encaja contigo',
       '#precios .subsection-title:nth-of-type(1)': 'Entrada General',
       '#precios .flip-hint': 'Haz click en las tarjetas para ver los detalles',
+        '#precios .flip-hint': 'Hover over or tap the cards to see the details.',
+        '.price-card-front .click-hint': '◆ Hover or tap to see details',
+        '#horarios .flip-hint': 'Pasa el cursor o toca las tarjetas para ver el nivel de movimiento por franja.',
+        '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver movimiento',
+        '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver movimiento',
+        '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver info util',
+        '#precios .flip-hint': 'Pasa el cursor o toca las tarjetas para ver los detalles.',
       '#precios .subsection-title:nth-of-type(2)': 'Masajes y Tratamientos',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Entrada Diaria',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': 'Lunes a Viernes',
@@ -768,8 +780,6 @@ function getStaticTranslations(lang) {
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-badge': 'Recomendado',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Masaje Completo',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': '1 hora',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-front h4': 'Masaje en Pareja',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-front .price-desc': '1 hora para dos',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Express',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duracion: 30 minutos',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Servicio de masaje',
@@ -780,34 +790,17 @@ function getStaticTranslations(lang) {
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Servicio de masaje',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ Reserva recomendada',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepcion',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-badge-back': 'Pareja',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(1)': '✓ Duracion: 1 hora para dos',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(2)': '✓ Servicio para dos personas',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(3)': '✓ Reserva previa recomendada',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(3) .price-card-back .price-features li:nth-child(4)': '✓ Confirmar disponibilidad por WhatsApp',
-      '.price-card-front .click-hint': '◆ Click para ver detalles',
+      '.price-card-front .click-hint': '◆ Pasa el cursor o toca para ver detalles',
       '.manifesto-kicker': 'SPT / Madrid centro',
       '.manifesto-box h2': 'Un lugar para bajar el ruido y recuperar tu energia.',
-      '.manifesto-box p': 'Creemos en el bienestar con discrecion, en el respeto como principio y en una experiencia que se recuerda por como te hace sentir.',
-      '.manifesto-box .btn': 'Hablar por WhatsApp',
+      '.manifesto-box > p:not(.manifesto-kicker)': 'Creemos en el bienestar con discrecion, en el respeto como principio y en una experiencia que se recuerda por como te hace sentir.',
+      '.manifesto-box .btn': 'Reservar por WhatsApp',
       '#galeria .section-title': 'Galeria',
       '#galeria .section-subtitle': 'Explora nuestro espacio',
       '.gallery-item[data-zone="sauna"] .gallery-overlay p': 'Zona de sauna',
       '.gallery-item[data-zone="vapor"] .gallery-overlay p': 'Bano de Vapor',
       '.gallery-item[data-zone="jacuzzi"] .gallery-overlay p': 'Jacuzzi Relajante',
       '.gallery-item[data-zone="tratamientos"] .gallery-overlay p': 'Tratamientos',
-      '.testimonials .section-title': 'Lo que dicen nuestros clientes',
-      '.testimonials .section-subtitle': 'Experiencias reales de quienes nos visitan',
-      '.testimonial-card:nth-child(1) .testimonial-text': '"Un espacio tranquilo y con mucha discrecion. Las instalaciones estan muy cuidadas y el personal es amable y profesional. Sin duda volveria."',
-      '.testimonial-card:nth-child(2) .testimonial-text': '"Llevo tiempo viniendo y siempre me ha parecido un sitio limpio, comodo y bien ubicado. La sauna y el jacuzzi estan muy bien. Ambiente muy agradable."',
-      '.testimonial-card:nth-child(3) .testimonial-text': '"Primera vez y la experiencia fue muy buena. Me recibieron bien, me explicaron todo y las instalaciones superaron mis expectativas. Zona bien comunicada tambien."',
-      '.review-form-title': 'Deja tu resena',
-      '.review-form-subtitle': 'Comparte tu experiencia con otros clientes',
-      'label[for="review-name"]': 'Nombre',
-      'label[for="review-lastname"]': 'Apellido',
-      '.rating-group > label': 'Calificacion',
-      'label[for="review-text"]': 'Tu resena',
-      '.review-submit': 'Enviar resena',
       '#faq .section-title': 'Preguntas Frecuentes',
       '#faq .section-subtitle': 'Informacion util para preparar tu visita',
       '#faq .faq-item:nth-child(1) .faq-question h3': 'Como es mi primera visita?',
@@ -888,10 +881,11 @@ function getStaticTranslations(lang) {
 }
 
 function initLanguageToggle() {
-  const toggle = document.getElementById('language-toggle');
+  const btnEs = document.getElementById('language-es');
+  const btnEn = document.getElementById('language-en');
   const translatable = document.querySelectorAll('[data-i18n]');
 
-  if (!toggle || translatable.length === 0) return;
+  if (!btnEs || !btnEn) return;
 
   function applyLanguage(lang) {
     const selected = lang === 'en' ? 'en' : 'es';
@@ -905,14 +899,18 @@ function initLanguageToggle() {
     });
 
     Object.entries(content.text).forEach(([selector, value]) => {
-      const nodes = document.querySelectorAll(selector);
-      nodes.forEach(node => {
-        if (selector === '#cookie-desc') {
-          node.innerHTML = value;
-        } else {
-          node.textContent = value;
-        }
-      });
+      try {
+        const nodes = document.querySelectorAll(selector);
+        nodes.forEach(node => {
+          if (selector === '#cookie-desc') {
+            node.innerHTML = value;
+          } else {
+            node.textContent = value;
+          }
+        });
+      } catch (error) {
+        // Ignore invalid selectors in translation maps to prevent blocking language switch.
+      }
     });
 
     content.attrs.forEach(item => {
@@ -928,8 +926,8 @@ function initLanguageToggle() {
     if (ogTitle) ogTitle.setAttribute('content', content.metas.ogTitle);
     if (ogDescription) ogDescription.setAttribute('content', content.metas.ogDescription);
 
-    toggle.textContent = content.toggle.label;
-    toggle.setAttribute('aria-label', content.toggle.aria);
+    btnEs.setAttribute('aria-pressed', selected === 'es' ? 'true' : 'false');
+    btnEn.setAttribute('aria-pressed', selected === 'en' ? 'true' : 'false');
     document.documentElement.lang = selected;
     localStorage.setItem('site-language', selected);
 
@@ -940,10 +938,8 @@ function initLanguageToggle() {
   const initialLanguage = getCurrentLanguage();
   applyLanguage(initialLanguage);
 
-  toggle.addEventListener('click', () => {
-    const current = getCurrentLanguage();
-    applyLanguage(current === 'es' ? 'en' : 'es');
-  });
+  btnEs.addEventListener('click', () => applyLanguage('es'));
+  btnEn.addEventListener('click', () => applyLanguage('en'));
 }
 
 // ========== WhatsApp Button ==========
@@ -1376,12 +1372,12 @@ function initExperienceMode() {
     if (language === 'en') {
       return {
         relax: {
-          title: 'Relax Plan',
+          title: 'Relaxation Plan',
           description: 'Start with steam bath, continue with jacuzzi and finish in lounge area for complete disconnection.',
-          ctaText: 'See relax route',
+          ctaText: 'See relaxation route',
           targetId: 'instalaciones',
-          heroText: 'Experience focused on relax and wellbeing in central Madrid',
-          heroBtn: 'Ask for relax plan'
+          heroText: 'Experience focused on relaxation and wellbeing in central Madrid',
+          heroBtn: 'Ask for relaxation plan'
         },
         social: {
           title: 'Social Plan',
@@ -1408,7 +1404,7 @@ function initExperienceMode() {
         description: 'Empieza por bano de vapor, continua con jacuzzi y termina en zona lounge para una desconexion completa.',
         ctaText: 'Ver recorrido relax',
         targetId: 'instalaciones',
-        heroText: 'Experiencia orientada a relax y bienestar en Madrid centro',
+        heroText: 'Experiencia orientada a relajación y bienestar en Madrid centro',
         heroBtn: 'Consultar plan relax'
       },
       social: {
@@ -1646,114 +1642,6 @@ function initSaturdayEventMode() {
       heroSecondaryBtn.textContent = language === 'en' ? 'Confirm capacity now' : 'Confirmar aforo ahora';
     }
   }
-}
-
-// ========== Review Form ==========
-function initReviewForm() {
-  const form = document.getElementById('review-form');
-  const stars = document.querySelectorAll('#star-rating .star');
-  const ratingInput = document.getElementById('review-rating');
-  const feedback = document.getElementById('review-feedback');
-
-  if (!form || !stars.length || !ratingInput || !feedback) return;
-
-  let selectedValue = Number(ratingInput.value || 0);
-
-  function getReviewMessages(language) {
-    if (language === 'en') {
-      return {
-        validationError: 'Complete name, last name, write your review and select a star rating.',
-        success: 'Thanks for your review. It was saved correctly for moderation.'
-      };
-    }
-
-    return {
-      validationError: 'Completa nombre, apellido, escribe tu resena y selecciona una calificacion por estrellas.',
-      success: 'Gracias por tu resena. Se ha guardado correctamente para revision.'
-    };
-  }
-
-  function paintStars(value) {
-    stars.forEach(star => {
-      const starValue = Number(star.dataset.value || 0);
-      star.classList.toggle('active', starValue <= value);
-    });
-  }
-
-  function paintHoverStars(value) {
-    stars.forEach(star => {
-      const starValue = Number(star.dataset.value || 0);
-      star.classList.toggle('hovered', starValue <= value);
-    });
-  }
-
-  function escapeHtml(text) {
-    return text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  stars.forEach(star => {
-    star.addEventListener('mouseenter', function() {
-      const value = Number(this.dataset.value || 0);
-      paintHoverStars(value);
-    });
-
-    star.addEventListener('click', function() {
-      const value = Number(this.dataset.value || 0);
-      selectedValue = value;
-      ratingInput.value = String(value);
-      paintStars(value);
-      feedback.textContent = '';
-      feedback.classList.remove('error', 'success');
-    });
-  });
-
-  const starRating = document.getElementById('star-rating');
-  if (starRating) {
-    starRating.addEventListener('mouseleave', function() {
-      paintHoverStars(0);
-      paintStars(selectedValue);
-    });
-  }
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = form.elements.name.value.trim();
-    const lastname = form.elements.lastname.value.trim();
-    const reviewText = form.elements.review.value.trim();
-    const rating = Number(ratingInput.value || 0);
-
-    feedback.classList.remove('error', 'success');
-    const messages = getReviewMessages(getCurrentLanguage());
-
-    if (!name || !lastname || !reviewText || rating < 1) {
-      feedback.textContent = messages.validationError;
-      feedback.classList.add('error');
-      return;
-    }
-
-    const pendingReviews = JSON.parse(localStorage.getItem('pendingReviews') || '[]');
-    pendingReviews.push({
-      name: escapeHtml(name),
-      lastname: escapeHtml(lastname),
-      review: escapeHtml(reviewText),
-      rating,
-      createdAt: new Date().toISOString()
-    });
-    localStorage.setItem('pendingReviews', JSON.stringify(pendingReviews));
-
-    feedback.textContent = messages.success;
-    feedback.classList.add('success');
-    form.reset();
-    selectedValue = 0;
-    ratingInput.value = '0';
-    paintStars(0);
-    paintHoverStars(0);
-  });
 }
 
 // ========== Utilities ==========

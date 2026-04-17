@@ -58,24 +58,39 @@
 
 /* Mobile - Medium */
 @media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
   .navbar {
-    padding: 12px 0;
+    padding: 10px 0;
   }
 
   .navbar-content {
     position: relative;
+    align-items: center;
     border-radius: 22px;
     padding: 10px 12px;
   }
 
   .nav-actions {
     gap: 10px;
+    margin-left: auto;
+  }
+
+  .language-switcher {
+    gap: 6px;
   }
 
   .language-toggle {
     height: 34px;
-    min-width: 52px;
-    padding: 0 12px;
+    min-width: 40px;
+    width: 40px;
+    padding: 0;
     font-size: 11px;
   }
 
@@ -97,6 +112,7 @@
 
   .nav-menu.active {
     display: flex;
+    animation: mobileMenuReveal 0.24s ease;
   }
 
   .nav-link {
@@ -117,21 +133,30 @@
   }
 
   .hero {
-    min-height: 70vh;
+    min-height: calc(100svh - 84px);
+    padding: 110px 0 70px;
   }
 
   .brand-seal {
     display: none;
   }
 
+  .hero-content {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
   .hero-title {
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: clamp(36px, 9vw, 48px);
+    line-height: 1.08;
+    margin-bottom: 14px;
   }
 
   .hero-subtitle {
-    font-size: 16px;
-    margin-bottom: 30px;
+    max-width: 24ch;
+    margin: 0 auto 28px;
+    font-size: 19px;
+    line-height: 1.45;
   }
 
   .event-mode-badge {
@@ -144,18 +169,32 @@
   .hero-ctas {
     flex-direction: column;
     gap: 12px;
+    align-items: stretch;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
   }
 
   .section {
-    padding: 50px 0;
+    padding: 44px 0;
+  }
+
+  .section-header {
+    margin-bottom: 34px;
   }
 
   .section-title {
     font-size: 32px;
+    line-height: 1.08;
   }
 
   .section-subtitle {
-    font-size: 16px;
+    font-size: 17px;
+    line-height: 1.55;
   }
 
   .prices-grid,
@@ -175,6 +214,29 @@
   .health-card,
   .contact-card {
     padding: 25px;
+  }
+
+  .experience-chips {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .experience-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .tour-card {
+    border-radius: 24px;
+    overflow: hidden;
   }
 
   .price-amount {
@@ -272,8 +334,13 @@
     height: 280px;
   }
 
+  .faq-container {
+    gap: 14px;
+  }
+
   .faq-question h3 {
     font-size: 16px;
+    line-height: 1.35;
   }
 
   .map-container {
@@ -297,6 +364,24 @@
     gap: 10px;
   }
 
+  .cookie-banner {
+    padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+  }
+
+  .cookie-content {
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .cookie-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .cookie-actions .btn {
+    width: 100%;
+  }
+
   .subsection-title {
     font-size: 24px;
     margin-top: 40px;
@@ -305,22 +390,24 @@
 
   /* Buttons */
   .whatsapp-btn {
-    width: 55px;
-    height: 55px;
-    bottom: 20px;
-    right: 20px;
+    width: 58px;
+    height: 58px;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    right: 16px;
   }
 
+  .whatsapp-btn i,
   .whatsapp-btn svg {
-    width: 28px;
-    height: 28px;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
   }
 
   .scroll-top-btn {
-    width: 45px;
-    height: 45px;
-    bottom: 90px;
-    right: 20px;
+    width: 46px;
+    height: 46px;
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    right: 16px;
     font-size: 20px;
   }
 }
@@ -329,6 +416,16 @@
 @media (max-width: 480px) {
   .container {
     padding: 0 15px;
+  }
+
+  .navbar {
+    padding: 8px 0;
+  }
+
+  .navbar-content {
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 18px;
   }
 
   .logo {
@@ -341,7 +438,7 @@
   }
 
   .hero-title {
-    font-size: 32px;
+    font-size: clamp(30px, 10vw, 38px);
     margin-bottom: 10px;
   }
 
@@ -351,8 +448,8 @@
   }
 
   .hero-subtitle {
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 17px;
+    margin-bottom: 18px;
   }
 
   .event-mode-badge {
@@ -366,6 +463,10 @@
 
   .section-title {
     font-size: 24px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
   }
 
   .experience-chips {
@@ -383,7 +484,7 @@
   }
 
   .section {
-    padding: 40px 0;
+    padding: 38px 0;
   }
 
   .journey-step,
@@ -398,12 +499,30 @@
   }
 
   .section-header {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
 
   .btn {
-    padding: 12px 25px;
-    font-size: 14px;
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+  }
+
+  .experience-panel,
+  .tour-info,
+  .manifesto-box,
+  .journey-step,
+  .checklist-card,
+  .real-question-card,
+  .contact-card,
+  .health-card,
+  .about-card,
+  .facility-card,
+  .price-card,
+  .schedule-card {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .about-card {
@@ -420,7 +539,7 @@
   }
 
   .about-card p {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .facility-card {
@@ -438,7 +557,7 @@
   }
 
   .facility-card p {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .price-card {
@@ -461,7 +580,7 @@
   }
 
   .price-desc {
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 15px;
   }
 
@@ -471,7 +590,7 @@
   }
 
   .price-features li {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .schedule-card {
@@ -489,21 +608,21 @@
   }
 
   .schedule-note {
-    font-size: 11px;
+    font-size: 14px;
     margin-top: 10px;
   }
 
   .schedule-contact {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .gallery-item {
-    height: 220px;
+    height: 240px;
   }
 
   .faq-container {
@@ -530,7 +649,7 @@
 
   .faq-answer p {
     padding: 0 15px 15px;
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .health-card {
@@ -543,7 +662,7 @@
   }
 
   .health-card p {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .contact-card {
@@ -556,7 +675,15 @@
   }
 
   .contact-card p {
-    font-size: 12px;
+    font-size: 15px;
+  }
+
+  .cookie-banner {
+    padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .cookie-content p {
+    font-size: 13px;
   }
 
   .map-container {
@@ -579,7 +706,7 @@
 
   .footer-section p,
   .footer-section a {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .social-icons {
@@ -605,22 +732,24 @@
 
   /* Buttons */
   .whatsapp-btn {
-    width: 50px;
-    height: 50px;
-    bottom: 15px;
-    right: 15px;
+    width: 54px;
+    height: 54px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    right: 14px;
   }
 
+  .whatsapp-btn i,
   .whatsapp-btn svg {
-    width: 24px;
-    height: 24px;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
   }
 
   .scroll-top-btn {
     width: 40px;
     height: 40px;
-    bottom: 80px;
-    right: 15px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    right: 14px;
     font-size: 18px;
   }
 }
@@ -642,6 +771,27 @@
   .btn {
     padding: 10px 20px;
     font-size: 13px;
+  }
+
+  .language-toggle {
+    min-width: 36px;
+    width: 36px;
+    height: 32px;
+  }
+
+  .menu-toggle {
+    padding: 7px;
+  }
+}
+
+@keyframes mobileMenuReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

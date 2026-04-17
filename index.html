@@ -50,10 +50,16 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- AOS (Animate On Scroll) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<!-- Flag Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 
 <!-- Estilos -->
 <link rel="stylesheet" href="css/reset.css">
@@ -95,12 +101,15 @@
         <a href="#nosotros" class="nav-link" data-i18n="nav_about">Sobre Nosotros</a>
         <a href="#instalaciones" class="nav-link" data-i18n="nav_facilities">Instalaciones</a>
         <a href="#horarios" class="nav-link" data-i18n="nav_hours">Horarios</a>
-        <a href="#precios" class="nav-link" data-i18n="nav_prices">Precios</a>
+        <a href="#precios" class="nav-link" data-i18n="nav_prices">Tarifas</a>
         <a href="#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
         <a href="#contacto" class="nav-link cta-btn" data-i18n="nav_book">Reservar</a>
       </nav>
       <div class="nav-actions">
-        <button id="language-toggle" class="language-toggle" type="button" aria-label="Cambiar idioma">EN</button>
+        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+          <button id="language-es" class="language-toggle" type="button" aria-label="Cambiar a español" title="Español" aria-pressed="true"><span class="fi fi-es" aria-hidden="true"></span></button>
+          <button id="language-en" class="language-toggle" type="button" aria-label="Switch to English" title="English" aria-pressed="false"><span class="fi fi-gb" aria-hidden="true"></span></button>
+        </div>
         <button class="menu-toggle">
           <span></span>
           <span></span>
@@ -196,17 +205,17 @@
     </div>
     <div class="about-grid">
       <div class="about-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="card-icon">🌡️</div>
+        <div class="card-icon"><i class="bi bi-heart-pulse" aria-hidden="true"></i></div>
         <h3>Especialistas en Bienestar</h3>
         <p>Un entorno pensado para el descanso, la desconexión y el bienestar personal.</p>
       </div>
       <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="card-icon">🔒</div>
+        <div class="card-icon"><i class="bi bi-shield-lock" aria-hidden="true"></i></div>
         <h3>Privacidad y Discreción</h3>
         <p>Trabajamos con enfoque en discreción, respeto y trato profesional en todo momento.</p>
       </div>
       <div class="about-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="card-icon">⭐</div>
+        <div class="card-icon"><i class="bi bi-award" aria-hidden="true"></i></div>
         <h3>Atención Profesional</h3>
         <p>Equipo disponible para resolver dudas y acompañarte durante tu visita.</p>
       </div>
@@ -223,32 +232,32 @@
     </div>
     <div class="facilities-grid">
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="0">
-        <div class="facility-icon">🔥</div>
+        <div class="facility-icon"><i class="bi bi-thermometer-sun" aria-hidden="true"></i></div>
         <h3>Sauna Finlandesa</h3>
         <p>Zona de sauna para relajación y bienestar.</p>
       </div>
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="100">
-        <div class="facility-icon">💨</div>
+        <div class="facility-icon"><i class="bi bi-cloud-fog2" aria-hidden="true"></i></div>
         <h3>Baño de Vapor</h3>
         <p>Zona de vapor disponible en el recorrido del local.</p>
       </div>
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="200">
-        <div class="facility-icon">💧</div>
+        <div class="facility-icon"><i class="bi bi-droplet" aria-hidden="true"></i></div>
         <h3>Jacuzzi</h3>
         <p>Zona de agua para descanso y relax.</p>
       </div>
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="300">
-        <div class="facility-icon">🛏️</div>
+        <div class="facility-icon"><i class="bi bi-door-closed" aria-hidden="true"></i></div>
         <h3>Cabinas Privadas</h3>
         <p>Espacios de uso privado. Consulta condiciones en recepción.</p>
       </div>
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="400">
-        <div class="facility-icon">🍷</div>
+        <div class="facility-icon"><i class="bi bi-cup-hot" aria-hidden="true"></i></div>
         <h3>Bar y Lounge</h3>
         <p>Zona de descanso para pausas durante la visita.</p>
       </div>
       <div class="facility-card" data-aos="zoom-in" data-aos-delay="500">
-        <div class="facility-icon">🧖</div>
+        <div class="facility-icon"><i class="bi bi-hand-index-thumb" aria-hidden="true"></i></div>
         <h3>Masajes Profesionales</h3>
         <p>Servicio de masaje disponible bajo consulta.</p>
       </div>
@@ -287,7 +296,6 @@
       <h2 class="section-title">Horarios</h2>
       <p class="section-subtitle">Horario actual: todos los días de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.</p>
     </div>
-    <p class="flip-hint">Haz click en las tarjetas para ver el nivel de movimiento por franja</p>
     <div class="schedule-grid">
       <!-- Lunes a Jueves -->
       <div class="schedule-card-flip" data-aos="fade-up" data-aos-delay="0">
@@ -296,7 +304,6 @@
             <h3>Lunes a Jueves</h3>
             <p class="schedule-time">14:00 - 23:00</p>
             <p class="schedule-note">Ritmo más relajado</p>
-            <p class="click-hint">◆ Click para ver movimiento</p>
           </div>
           <div class="schedule-card-back">
             <p class="schedule-back-title">Movimiento estimado</p>
@@ -318,7 +325,6 @@
             <p class="schedule-current-time" id="sched-time-weekday"></p>
             <p class="schedule-movement-copy" id="sched-copy-weekday">Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.</p>
             <p class="schedule-peak-window" id="sched-peak-weekday"></p>
-            <p class="sched-back-hint">◆ Click para volver</p>
           </div>
         </div>
       </div>
@@ -330,7 +336,6 @@
             <h3>Viernes a Domingo</h3>
             <p class="schedule-time">14:00 - 23:00</p>
             <p class="schedule-note">Más ambiente social</p>
-            <p class="click-hint">◆ Click para ver movimiento</p>
           </div>
           <div class="schedule-card-back">
             <p class="schedule-back-title">Movimiento estimado</p>
@@ -352,7 +357,6 @@
             <p class="schedule-current-time" id="sched-time-weekend"></p>
             <p class="schedule-movement-copy" id="sched-copy-weekend">Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.</p>
             <p class="schedule-peak-window" id="sched-peak-weekend"></p>
-            <p class="sched-back-hint">◆ Click para volver</p>
           </div>
         </div>
       </div>
@@ -364,14 +368,14 @@
             <h3>Contacto</h3>
             <p class="schedule-contact">Cta. de las Descargas, 6<br>28005 Madrid</p>
             <p class="schedule-note">Centro de Madrid</p>
-            <p class="click-hint">◆ Click para ver info útil</p>
           </div>
           <div class="schedule-card-back">
             <p class="schedule-back-title">Antes de venir</p>
-            <p class="schedule-directions">📲 Confirma disponibilidad por WhatsApp
-🪪 Trae documentación válida
-🕒 Ven con tiempo para disfrutar mejor</p>
-            <p class="sched-back-hint">◆ Click para volver</p>
+            <p class="schedule-directions">
+              <span><i class="bi bi-whatsapp" aria-hidden="true"></i>Confirma disponibilidad por WhatsApp</span>
+              <span><i class="bi bi-person-vcard" aria-hidden="true"></i>Trae documentación válida</span>
+              <span><i class="bi bi-clock" aria-hidden="true"></i>Ven con tiempo para disfrutar mejor</span>
+            </p>
           </div>
         </div>
       </div>
@@ -384,21 +388,18 @@
   <div class="container">
     <div class="section-header" data-aos="fade-up">
       <h2 class="section-title">Tarifas</h2>
-      <p class="section-subtitle">Tarifas claras para que elijas la opción que mejor encaja contigo</p>
     </div>
     
     <h3 class="subsection-title" data-aos="fade-up">Entrada General</h3>
-    <p class="flip-hint">Haz click en las tarjetas para ver los detalles</p>
     <div class="prices-grid">
       <div class="price-card-flip" data-aos="flip-left" data-aos-delay="0">
         <div class="price-card-inner">
           <!-- FRENTE -->
           <div class="price-card-front">
-            <div class="price-icon">🎫</div>
+            <div class="price-icon"><i class="bi bi-ticket-perforated" aria-hidden="true"></i></div>
             <h4>Entrada Diaria</h4>
             <div class="price-amount">15€</div>
             <p class="price-desc">Lunes a Viernes</p>
-            <p class="click-hint">◆ Click para ver detalles</p>
           </div>
           <!-- DORSO -->
           <div class="price-card-back">
@@ -417,11 +418,10 @@
           <!-- FRENTE -->
           <div class="price-card-front">
             <div class="price-badge">Popular</div>
-            <div class="price-icon">🎉</div>
+            <div class="price-icon"><i class="bi bi-calendar2-heart" aria-hidden="true"></i></div>
             <h4>Entrada Fin de Semana</h4>
             <div class="price-amount">16€</div>
             <p class="price-desc">Sábados, Domingos y Festivos</p>
-            <p class="click-hint">◆ Click para ver detalles</p>
           </div>
           <!-- DORSO -->
           <div class="price-card-back">
@@ -443,11 +443,10 @@
         <div class="price-card-inner">
           <!-- FRENTE -->
           <div class="price-card-front">
-            <div class="price-icon">💆</div>
+            <div class="price-icon"><i class="bi bi-stopwatch" aria-hidden="true"></i></div>
             <h4>Masaje Express</h4>
             <div class="price-amount">30€</div>
             <p class="price-desc">30 minutos</p>
-            <p class="click-hint">◆ Click para ver detalles</p>
           </div>
           <!-- DORSO -->
           <div class="price-card-back">
@@ -466,11 +465,10 @@
           <!-- FRENTE -->
           <div class="price-card-front">
             <div class="price-badge">Recomendado</div>
-            <div class="price-icon">🌟</div>
+            <div class="price-icon"><i class="bi bi-gem" aria-hidden="true"></i></div>
             <h4>Masaje Completo</h4>
             <div class="price-amount">50€</div>
             <p class="price-desc">1 hora</p>
-            <p class="click-hint">◆ Click para ver detalles</p>
           </div>
           <!-- DORSO -->
           <div class="price-card-back">
@@ -480,28 +478,6 @@
               <li>✓ Servicio de masaje</li>
               <li>✓ Reserva recomendada</li>
               <li>✓ Condiciones en recepción</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="price-card-flip" data-aos="flip-right" data-aos-delay="200">
-        <div class="price-card-inner">
-          <!-- FRENTE -->
-          <div class="price-card-front">
-            <div class="price-icon">👥</div>
-            <h4>Masaje en Pareja</h4>
-            <div class="price-amount">90€</div>
-            <p class="price-desc">1 hora para dos</p>
-            <p class="click-hint">◆ Click para ver detalles</p>
-          </div>
-          <!-- DORSO -->
-          <div class="price-card-back">
-            <div class="price-badge-back">Pareja</div>
-            <ul class="price-features">
-              <li>✓ Duración: 1 hora para dos</li>
-              <li>✓ Servicio para dos personas</li>
-              <li>✓ Reserva previa recomendada</li>
-              <li>✓ Confirmar disponibilidad por WhatsApp</li>
             </ul>
           </div>
         </div>
@@ -517,7 +493,7 @@
       <p class="manifesto-kicker">SPT / Madrid centro</p>
       <h2>Un lugar para bajar el ruido y recuperar tu energía.</h2>
       <p>Creemos en el bienestar con discreción, en el respeto como principio y en una experiencia que se recuerda por cómo te hace sentir.</p>
-      <button class="btn btn-primary" type="button" data-action="open-whatsapp">Hablar por WhatsApp</button>
+      <button class="btn btn-primary" type="button" data-action="open-whatsapp">Reservar por WhatsApp</button>
     </div>
   </div>
 </section>
@@ -558,88 +534,6 @@
           <p>Tratamientos</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== TESTIMONIOS ========== -->
-<section class="section testimonials dark-bg">
-  <div class="container">
-    <div class="section-header" data-aos="fade-up">
-      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-      <p class="section-subtitle">Experiencias reales de quienes nos visitan</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
-        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">&ldquo;Un espacio tranquilo y con mucha discreción. Las instalaciones están muy cuidadas y el personal es amable y profesional. Sin duda volvería.&rdquo;</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">J.M.</div>
-          <div>
-            <strong>J. Martínez</strong>
-            <span>Madrid</span>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">&ldquo;Llevo tiempo viniendo y siempre me ha parecido un sitio limpio, cómodo y bien ubicado. La sauna y el jacuzzi están muy bien. Ambiente muy agradable.&rdquo;</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">R.G.</div>
-          <div>
-            <strong>R. Gómez</strong>
-            <span>Barcelona (visita Madrid)</span>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-        <p class="testimonial-text">&ldquo;Primera vez y la experiencia fue muy buena. Me recibieron bien, me explicaron todo y las instalaciones superaron mis expectativas. Zona bien comunicada también.&rdquo;</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">A.P.</div>
-          <div>
-            <strong>A. Pérez</strong>
-            <span>Madrid</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review-form-wrap" data-aos="fade-up" data-aos-delay="350">
-      <h3 class="review-form-title">Deja tu reseña</h3>
-      <p class="review-form-subtitle">Comparte tu experiencia con otros clientes</p>
-      <form id="review-form" class="review-form">
-        <div class="review-form-grid">
-          <div class="form-group">
-            <label for="review-name">Nombre</label>
-            <input type="text" id="review-name" name="name" placeholder="Tu nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="review-lastname">Apellido</label>
-            <input type="text" id="review-lastname" name="lastname" placeholder="Tu apellido" required>
-          </div>
-        </div>
-
-        <div class="form-group rating-group">
-          <label>Calificacion</label>
-          <div class="star-rating" id="star-rating" aria-label="Calificacion por estrellas">
-            <button type="button" class="star" data-value="1" aria-label="1 estrella">&#9733;</button>
-            <button type="button" class="star" data-value="2" aria-label="2 estrellas">&#9733;</button>
-            <button type="button" class="star" data-value="3" aria-label="3 estrellas">&#9733;</button>
-            <button type="button" class="star" data-value="4" aria-label="4 estrellas">&#9733;</button>
-            <button type="button" class="star" data-value="5" aria-label="5 estrellas">&#9733;</button>
-          </div>
-          <input type="hidden" id="review-rating" name="rating" value="0" required>
-        </div>
-
-        <div class="form-group">
-          <label for="review-text">Tu reseña</label>
-          <textarea id="review-text" name="review" rows="5" placeholder="Escribe aqui tu experiencia..." maxlength="500" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary review-submit">Enviar reseña</button>
-        <p id="review-feedback" class="review-feedback" aria-live="polite"></p>
-      </form>
     </div>
   </div>
 </section>
@@ -736,17 +630,17 @@
     </div>
     <div class="contact-grid">
       <div class="contact-card" data-aos="fade-up" data-aos-delay="0">
-        <h3>📍 Dirección</h3>
+        <h3><i class="bi bi-geo-alt" aria-hidden="true"></i>Dirección</h3>
         <p>Cuesta de las Descargas, 6<br>28005 Madrid, España</p>
         <p class="contact-note">Centro de Madrid, junto a Puerta de Toledo</p>
       </div>
       <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>🚇 Cómo llegar</h3>
+        <h3><i class="bi bi-train-front" aria-hidden="true"></i>Cómo llegar</h3>
         <p>Puerta de Toledo / La Latina<br>Acceso rápido desde el centro</p>
         <p class="contact-note">Zona bien conectada en Metro y bus</p>
       </div>
       <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>📱 Contacto</h3>
+        <h3><i class="bi bi-telephone" aria-hidden="true"></i>Contacto</h3>
         <button class="btn btn-primary" type="button" data-action="open-whatsapp">WhatsApp</button>
         <p><a href="https://www.instagram.com/saunapuertadetoledo/" target="_blank" class="social-link">Instagram</a></p>
       </div>
@@ -779,9 +673,9 @@
       <div class="footer-section">
         <h4>Síguenos</h4>
         <div class="social-icons">
-          <a href="https://www.facebook.com/saunapuertadetoledo" target="_blank" aria-label="Facebook">f</a>
-          <a href="https://twitter.com/saunapuerta" target="_blank" aria-label="Twitter">𝕏</a>
-          <a href="https://www.instagram.com/saunapuertadetoledo/" target="_blank" aria-label="Instagram">📷</a>
+          <a href="https://www.facebook.com/saunapuertadetoledo" target="_blank" aria-label="Facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+          <a href="https://twitter.com/saunapuerta" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
+          <a href="https://www.instagram.com/saunapuertadetoledo/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
@@ -820,13 +714,11 @@
 
 <!-- ========== BOTÓN WHATSAPP FLOTANTE ========== -->
 <a href="#" id="whatsapp-btn" class="whatsapp-btn" data-action="open-whatsapp" title="Chat por WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.252 0-2.493.397-3.534 1.14l-.355.236-.267.159-3.971 1.48 1.505-3.883.15-.365.088-.228c.818-1.318 2.26-2.127 3.784-2.127 1.025 0 1.986.308 2.821.893l.26.169.265.173c1.49 1.032 2.54 2.668 2.54 4.55 0 .373-.026.743-.082 1.106l-.025.204-.018.229v.005c-.032.306-.15.562-.298.76"/>
-  </svg>
+  <i class="bi bi-whatsapp" aria-hidden="true"></i>
 </a>
 
 <!-- ========== SCROLL TO TOP ========== -->
-<button id="scroll-top-btn" class="scroll-top-btn" type="button">↑</button>
+<button id="scroll-top-btn" class="scroll-top-btn" type="button" aria-label="Volver arriba"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
