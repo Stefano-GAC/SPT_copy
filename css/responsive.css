@@ -396,9 +396,12 @@
     right: 16px;
   }
 
-  .whatsapp-btn i,
-  .whatsapp-btn svg {
+  .whatsapp-btn i {
     font-size: 30px;
+    line-height: 1;
+  }
+
+  .whatsapp-btn svg {
     width: 30px;
     height: 30px;
   }
@@ -738,9 +741,12 @@
     right: 14px;
   }
 
-  .whatsapp-btn i,
-  .whatsapp-btn svg {
+  .whatsapp-btn i {
     font-size: 28px;
+    line-height: 1;
+  }
+
+  .whatsapp-btn svg {
     width: 28px;
     height: 28px;
   }

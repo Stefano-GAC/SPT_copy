@@ -1550,10 +1550,14 @@ body.saturday-event .whatsapp-btn {
   animation: none;
 }
 
-.whatsapp-btn i,
-.whatsapp-btn svg {
+.whatsapp-btn i {
   display: block;
   font-size: 32px;
+  line-height: 1;
+}
+
+.whatsapp-btn svg {
+  display: block;
   width: 32px;
   height: 32px;
 }
