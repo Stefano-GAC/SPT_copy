@@ -1307,9 +1307,15 @@ body.saturday-event .whatsapp-btn {
 }
 
 .faq-answer {
-  height: 0;
+  max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: max-height 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.28s ease;
+}
+
+.faq-answer.is-open {
+  max-height: 520px;
+  opacity: 1;
 }
 
 .faq-answer-inner {
@@ -1327,7 +1333,7 @@ body.saturday-event .whatsapp-btn {
   transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
 }
 
-.faq-item.active .faq-answer-inner p {
+.faq-answer.is-open .faq-answer-inner p {
   opacity: 1;
   transform: translateY(0);
 }

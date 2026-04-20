@@ -13,356 +13,155 @@ document.addEventListener('DOMContentLoaded', function() {
   initHeroCarousel();
   initScrollProgress();
   initLightbox();
-  initCookieBanner();
   initLanguageToggle();
+  initCookieBanner();
   initExperienceMode();
   initVisitTour();
-  initWeekendVisualMode();
   initSaturdayEventMode();
+
+  // Fallback por si algún recurso externo retrasa el evento load.
+  window.setTimeout(hideLoadingScreen, 1800);
 });
 
-// ========== Loading Screen ==========
-window.addEventListener('load', function() {
-  const loader = document.getElementById('loading-screen');
-  if (loader) {
-    setTimeout(() => loader.classList.add('hidden'), 400);
+function hideLoadingScreen() {
+  const loadingScreen = document.getElementById('loading-screen');
+  if (!loadingScreen || loadingScreen.classList.contains('hidden')) return;
+
+  loadingScreen.classList.add('hidden');
+  window.setTimeout(() => {
+    if (loadingScreen.parentNode) {
+      loadingScreen.remove();
+    }
+  }, 800);
+}
+
+function runSafe(initializer) {
+  if (typeof initializer !== 'function') return;
+
+  try {
+    initializer();
+  } catch (error) {
+    console.error('Startup initializer failed:', error);
   }
-});
+}
 
-// ========== AOS (Animate On Scroll) Initialization ==========
 function initAOS() {
-  if (typeof AOS !== 'undefined') {
-    AOS.init({
+  if (window.AOS) {
+    window.AOS.init({
       duration: 800,
-      easing: 'ease-in-out',
       once: true,
-      offset: 100,
-      delay: 0
+      offset: 80
     });
   }
 }
 
-// ========== Navbar Opacity on Scroll ==========
+function initHtmlActionBindings() {
+  document.querySelectorAll('[data-action="open-whatsapp"]').forEach(node => {
+    node.addEventListener('click', function(event) {
+      event.preventDefault();
+      openWhatsApp();
+    });
+  });
+
+  document.querySelectorAll('[data-scroll-target]').forEach(node => {
+    node.addEventListener('click', function() {
+      const target = document.getElementById(this.dataset.scrollTarget);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+function initFAQ() {
+  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+  function syncItemState(item, isOpen) {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!question || !answer) return;
+
+    item.classList.toggle('active', isOpen);
+    answer.classList.toggle('is-open', isOpen);
+    question.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    if (!question) return;
+
+    syncItemState(item, item.classList.contains('active'));
+
+    question.addEventListener('click', function() {
+      const isOpen = item.classList.contains('active');
+
+      faqItems.forEach(otherItem => {
+        syncItemState(otherItem, false);
+      });
+
+      if (!isOpen) {
+        syncItemState(item, true);
+      }
+    });
+  });
+}
+
 function initNavbarOpacity() {
   const navbar = document.querySelector('.navbar');
   if (!navbar) return;
 
   window.addEventListener('scroll', function() {
-    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    const threshold = 50 ; // px desde el top
-
-    // Si estamos muy arriba (sin imagen detrás), navbar más opaco
-    if (scrollY < threshold) {
-      navbar.style.background = 'linear-gradient(90deg, rgba(14, 14, 14, 0.94), rgba(26, 26, 26, 0.96))';
-    } else {
-      // Si hay imagen detrás, navbar más transparente
-      navbar.style.background = 'linear-gradient(90deg, rgba(14, 14, 14, 0.58), rgba(26, 26, 26, 0.62))';
-    }
+    const scrolled = window.pageYOffset > 40;
+    navbar.classList.toggle('navbar-scrolled', scrolled);
   });
-
-  // Trigger inicial
-  window.dispatchEvent(new Event('scroll'));
 }
 
-// ========== Scroll to Top Button ==========
 function initScrollTop() {
   const scrollTopBtn = document.getElementById('scroll-top-btn');
-
   if (!scrollTopBtn) return;
 
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 300) {
-      scrollTopBtn.classList.add('show');
-    } else {
-      scrollTopBtn.classList.remove('show');
-    }
+  function toggleScrollTopVisibility() {
+    scrollTopBtn.classList.toggle('show', window.scrollY > 280);
+  }
+
+  scrollTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  scrollTopBtn.addEventListener('click', scrollToTop);
+  window.addEventListener('scroll', toggleScrollTopVisibility, { passive: true });
+  toggleScrollTopVisibility();
 }
 
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-// ========== HTML Action Bindings ==========
-function initHtmlActionBindings() {
-  document.querySelectorAll('[data-scroll-target]').forEach(trigger => {
-    trigger.addEventListener('click', function() {
-      const targetId = this.getAttribute('data-scroll-target');
-      if (!targetId) return;
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  document.querySelectorAll('[data-action="open-whatsapp"]').forEach(trigger => {
-    trigger.addEventListener('click', function(e) {
-      e.preventDefault();
-      openWhatsApp();
-    });
-  });
-}
-
-// ========== FAQ Toggle ==========
-function initFAQ() {
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-
-    if (question && answer) {
-      question.addEventListener('click', function() {
-        const isActive = item.classList.contains('active');
-
-        // Cerrar todos los demás
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item && otherItem.classList.contains('active')) {
-            otherItem.classList.remove('active');
-            const otherAnswer = otherItem.querySelector('.faq-answer');
-            if (otherAnswer) otherAnswer.style.height = '0';
-          }
-        });
-
-        // Toggle el actual con altura real
-        if (isActive) {
-          item.classList.remove('active');
-          answer.style.height = '0';
-        } else {
-          item.classList.add('active');
-          answer.style.height = answer.scrollHeight + 'px';
-        }
-      });
-    }
-  });
-}
-
-// ========== Flip Cards ==========
 function initFlipCards() {
-  const flipCards = document.querySelectorAll('.price-card-flip');
   const touchMode = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const flipCards = document.querySelectorAll('.price-card-flip');
 
   if (!touchMode) return;
 
   flipCards.forEach(card => {
-    card.addEventListener('click', function(e) {
-      if (e.target.closest('button, a')) {
-        return;
-      }
+    card.addEventListener('click', function(event) {
+      if (event.target.closest('.btn')) return;
 
-      this.classList.toggle('flipped');
-
-      const siblingCards = document.querySelectorAll('.price-card-flip');
-      siblingCards.forEach(sibling => {
+      flipCards.forEach(sibling => {
         if (sibling !== this && sibling.parentElement === this.parentElement) {
           sibling.classList.remove('flipped');
         }
       });
-    });
-  });
 
-  // Resetear flip cards en resize (opcional)
-  window.addEventListener('resize', function() {
-    if (window.innerWidth < 768) {
-      flipCards.forEach(card => {
-        card.classList.remove('flipped');
-      });
-    }
+      this.classList.toggle('flipped');
+    });
   });
 }
 
-// ========== Schedule Flip Cards ==========
 function initScheduleCards() {
-  const schedules = {
-    weekday: {
-      markerId: 'sched-marker-weekday',
-      statusId: 'sched-status-weekday',
-      timeId: 'sched-time-weekday',
-      copyId: 'sched-copy-weekday',
-      peakId: 'sched-peak-weekday',
-      openMinutes: 14 * 60,
-      closeMinutes: 23 * 60,
-      peakWindow: {
-        es: 'Franja con más movimiento: 18:30  - 21:30 ',
-        en: 'Busiest slot: 6:30  PM - 9:30  PM'
-      },
-      helperCopy: {
-        es: 'Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.',
-        en: 'Choose busier time slots and make the most of shared areas for a more dynamic visit.'
-      },
-      periods: [
-        { start: 14 * 60, end: 16  * 60 + 30 , level: 'calm' },
-        { start: 16  * 60 + 30 , end: 18 * 60 + 30 , level: 'steady' },
-        { start: 18 * 60 + 30 , end: 21 * 60 + 30 , level: 'peak' },
-        { start: 21 * 60 + 30 , end: 23 * 60, level: 'steady' }
-      ]
-    },
-    weekend: {
-      markerId: 'sched-marker-weekend',
-      statusId: 'sched-status-weekend',
-      timeId: 'sched-time-weekend',
-      copyId: 'sched-copy-weekend',
-      peakId: 'sched-peak-weekend',
-      openMinutes: 14 * 60,
-      closeMinutes: 23 * 60,
-      peakWindow: {
-        es: 'Franja con más movimiento: 17:00 - 22:00',
-        en: 'Busiest slot: 5:00 PM - 10:00 PM'
-      },
-      helperCopy: {
-        es: 'Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.',
-        en: 'Choose busier time slots and make the most of shared areas for a more dynamic visit.'
-      },
-      periods: [
-        { start: 14 * 60, end: 17 * 60, level: 'steady' },
-        { start: 17 * 60, end: 22 * 60, level: 'peak' },
-        { start: 22 * 60, end: 23 * 60, level: 'steady' }
-      ]
-    }
-  };
-
-  function getCurrentScheduleState(config) {
-    const now = new Date();
-    const nowMinutes = now.getHours() * 60 + now.getMinutes();
-    const normalizedNow = nowMinutes < config.openMinutes ? nowMinutes + 24 * 60 : nowMinutes;
-    const withinSchedule = normalizedNow >= config.openMinutes && normalizedNow <= config.closeMinutes;
-    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-
-    if (!withinSchedule) {
-      return {
-        withinSchedule: false,
-        level: 'off',
-        markerPosition: 0,
-        timeStr
-      };
-    }
-
-    const activePeriod = config.periods.find(period => normalizedNow >= period.start && normalizedNow < period.end) || config.periods[config.periods.length - 1];
-    const markerPosition = ((normalizedNow - config.openMinutes) / (config.closeMinutes - config.openMinutes)) * 100;
-
-    return {
-      withinSchedule: true,
-      level: activePeriod.level,
-      markerPosition,
-      timeStr
-    };
-  }
-
-  function getLevelLabel(level, lang) {
-    const labels = {
-      es: {
-        calm: 'Movimiento tranquilo',
-        steady: 'Movimiento medio',
-        peak: 'Movimiento alto',
-        off: 'Fuera de franja'
-      },
-      en: {
-        calm: 'Quiet flow',
-        steady: 'Moderate flow',
-        peak: 'High flow',
-        off: 'Outside schedule'
-      }
-    };
-
-    return labels[lang][level];
-  }
-
-  function updateCards() {
-    const lang = getCurrentLanguage();
-    Object.values(schedules).forEach(config => {
-      const state = getCurrentScheduleState(config);
-      const marker = document.getElementById(config.markerId);
-      const badge = document.getElementById(config.statusId);
-      const timeEl = document.getElementById(config.timeId);
-      const copyEl = document.getElementById(config.copyId);
-      const peakEl = document.getElementById(config.peakId);
-
-      if (badge) {
-        badge.textContent = getLevelLabel(state.level, lang);
-        badge.className = 'schedule-status-badge ' + state.level;
-      }
-
-      if (timeEl) {
-        timeEl.textContent = state.withinSchedule
-          ? (lang === 'en'
-            ? 'Current time: ' + state.timeStr + ' · Marker placed on the estimated flow band'
-            : 'Hora actual: ' + state.timeStr + ' · El marcador señala la franja estimada')
-          : (lang === 'en'
-            ? 'Current time: ' + state.timeStr + ' · Venue closed in this time range'
-            : 'Hora actual: ' + state.timeStr + ' · Local cerrado en esta franja');
-      }
-
-      if (copyEl) {
-        copyEl.textContent = config.helperCopy[lang];
-      }
-
-      if (peakEl) {
-        peakEl.textContent = config.peakWindow[lang];
-      }
-
-      if (marker) {
-        marker.classList.toggle('hidden', !state.withinSchedule);
-        marker.style.left = state.markerPosition + '%';
-      }
-    });
-  }
-
   const touchMode = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   document.querySelectorAll('.schedule-card-flip').forEach(card => {
-    if (touchMode) {
-      card.addEventListener('click', function() {
-        const goingToBack = !this.classList.contains('flipped');
-        this.classList.toggle('flipped');
-        if (goingToBack) updateCards();
-      });
-    } else {
-      card.addEventListener('mouseenter', function() {
-        updateCards();
-      });
-    }
-  });
+    if (!touchMode) return;
 
-  // Legend zone highlight on click
-  const legendZones = {
-    weekday: { calm: [0, 26], steady: [26, 56], peak: [56, 80] },
-    weekend: { calm: [0, 18], steady: [18, 46], peak: [46, 82] }
-  };
-  const scheduleCardEls = Array.from(document.querySelectorAll('#horarios .schedule-card-flip'));
-  document.querySelectorAll('#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item, #horarios .schedule-card-flip:nth-child(2) .schedule-legend-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const cardFlip = this.closest('.schedule-card-flip');
-      const schedKey = scheduleCardEls.indexOf(cardFlip) === 1 ? 'weekend' : 'weekday';
-      const level = this.dataset.level;
-      const highlight = document.getElementById('sched-highlight-' + schedKey);
-      if (!highlight) return;
-
-      const wasActive = this.classList.contains('legend-active');
-      cardFlip.querySelectorAll('.schedule-legend-item').forEach(i => i.classList.remove('legend-active'));
-
-      if (wasActive) {
-        highlight.classList.remove('active');
-        return;
-      }
-
-      this.classList.add('legend-active');
-      const zone = legendZones[schedKey][level] || [0, 0];
-      highlight.style.left = zone[0] + '%';
-      highlight.style.width = (zone[1] - zone[0]) + '%';
-      highlight.classList.add('active');
+    card.addEventListener('click', function() {
+      this.classList.toggle('flipped');
     });
-  });
-
-  document.addEventListener('languagechange', function() {
-    const anyFlipped = document.querySelector('.schedule-card-flip.flipped');
-    if (anyFlipped) updateCards();
   });
 }
 
@@ -564,21 +363,19 @@ function getStaticTranslations(lang) {
       '#tour-next': 'Next',
       '#horarios .section-title': 'Opening Hours',
       '#horarios .section-subtitle': 'Current schedule: every day from 2:00 PM to 11:00 PM. We recommend confirming on WhatsApp before your visit.',
-      '#horarios .flip-hint': 'Click the cards to see the estimated flow by time slot',
+      '#horarios .flip-hint': 'Click the cards to discover the vibe',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Monday to Thursday',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'A more relaxed pace',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click to see flow',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Estimated Flow',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(1)': 'Lower flow',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(2)': 'Moderate flow',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(3)': 'Higher flow',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click to discover the vibe',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Weekdays',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-movement-copy': 'On weekdays, looks last longer, silence says plenty, and sometimes the best plan is simply to be found.',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-peak-window': 'No one rushes here: the interesting part usually gets closer slowly... and on purpose.',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front h3': 'Friday to Sunday',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .schedule-note': 'A more social atmosphere',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click to see flow',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Estimated Flow',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(1)': 'Lower flow',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(2)': 'Moderate flow',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(3)': 'Higher flow',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click to discover the vibe',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Weekend',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-movement-copy': 'Weekends come with more spark, fewer detours, and plenty of desire to play with the tension.',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-peak-window': 'If you walk in curious, chances are you will leave smiling... and with a memory that is hard to explain.',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front h3': 'Contact',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .schedule-note': 'Madrid city center',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Click to see useful info',
@@ -638,13 +435,11 @@ function getStaticTranslations(lang) {
       '#faq .faq-item:nth-child(3) .faq-question h3': 'Are there coexistence rules?',
       '#faq .faq-item:nth-child(4) .faq-question h3': 'What is your disinfection policy?',
       '#faq .faq-item:nth-child(5) .faq-question h3': 'Do you accept groups?',
-      '#faq .faq-item:nth-child(6) .faq-question h3': 'Do you accept heterosexual couples?',
       '#faq .faq-item:nth-child(1) .faq-answer p': 'At reception you present your ID, pay the entry and receive your locker key. Staff briefly explains available areas and venue rules. From there you can move independently. We recommend arriving with enough time to settle in and enjoy the facilities.',
       '#faq .faq-item:nth-child(2) .faq-answer p': 'Valid ID is mandatory: DNI, NIE or passport. Access is not allowed without identification. We also recommend bringing flip-flops for wet areas. Towel is available on site. If you have questions about what your entry includes, ask reception or contact us on WhatsApp.',
       '#faq .faq-item:nth-child(3) .faq-answer p': 'Mutual respect is essential. Taking photos or videos is strictly forbidden in all areas. Showering before entering wet areas is mandatory and towel use on surfaces is required. Any interaction requires explicit consent. Staff is present to ensure coexistence.',
       '#faq .faq-item:nth-child(4) .faq-answer p': 'Facilities are cleaned and disinfected regularly throughout the day. Towel use on surfaces is mandatory. Showering before sauna, jacuzzi and pool access is required. Hygiene products are available in bathrooms. For specific needs, contact us on WhatsApp before your visit.',
-      '#faq .faq-item:nth-child(5) .faq-answer p': 'Yes, groups are allowed, but we recommend notifying us in advance to ensure comfort for everyone. On high-demand slots capacity limits may apply. Contact us on WhatsApp with approximate group size and preferred time slot for confirmation.',
-      '#faq .faq-item:nth-child(6) .faq-answer p': 'Sauna Puerta de Toledo is primarily oriented to male audience. For specific access conditions, contact us on WhatsApp before your visit and we will reply with updated information.',
+      '#faq .faq-item:nth-child(5) .faq-answer p': 'No, groups are not allowed. We want to preserve the atmosphere of the venue and the comfort of each visit.',
       '.health .section-title': 'Safety & Health',
       '.health .section-subtitle': 'Commitment to coexistence, respect and care',
       '.health-card:nth-child(1) h3': 'Privacy Guarantee',
@@ -725,27 +520,25 @@ function getStaticTranslations(lang) {
       '#tour-next': 'Siguiente',
       '#horarios .section-title': 'Horarios',
       '#horarios .section-subtitle': 'Horario actual: todos los días de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.',
-      '#horarios .flip-hint': 'Haz click en las tarjetas para ver el nivel de movimiento por franja',
+      '#horarios .flip-hint': 'Haz click en las tarjetas para descubrir el ambiente',
         '#horarios .flip-hint': 'Hover over or tap the cards to see the activity level by time slot.',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Lunes a jueves',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'Ritmo más relajado',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click para descubrir el ambiente',
         '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Movimiento estimado',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(3)': 'Más movimiento',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Entre semana',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-movement-copy': 'Entre semana las miradas duran más, los silencios dicen bastante y a veces lo mejor es dejarse encontrar.',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-peak-window': 'Aquí nadie corre: lo interesante suele acercarse despacio... y con intención.',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front h3': 'Viernes a domingo',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .schedule-note': 'Más ambiente social',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click para descubrir el ambiente',
         '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Movimiento estimado',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(3)': 'Más movimiento',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Fin de semana',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-movement-copy': 'El fin de semana llega con más chispa, menos rodeos y muchas ganas de jugar con la tensión.',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-peak-window': 'Si entras con curiosidad, es fácil que salgas con una sonrisa y algún recuerdo difícil de explicar.',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front h3': 'Contacto',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .schedule-note': 'Centro de Madrid',
-      '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Click para ver info util',
+      '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Click para ver info útil',
         '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Hover or tap to see useful info',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-back-title': 'Antes de venir',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-directions': '📲 Confirma disponibilidad por WhatsApp\n🪪 Trae documentación válida\n🕒 Ven con tiempo para disfrutar mejor',
@@ -754,24 +547,24 @@ function getStaticTranslations(lang) {
       '#precios .flip-hint': 'Haz click en las tarjetas para ver los detalles',
         '#precios .flip-hint': 'Hover over or tap the cards to see the details.',
         '.price-card-front .click-hint': '◆ Hover or tap to see details',
-        '#horarios .flip-hint': 'Pasa el cursor o toca las tarjetas para ver el nivel de movimiento por franja.',
-        '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver movimiento',
-        '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver movimiento',
-        '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver info util',
+        '#horarios .flip-hint': 'Pasa el cursor o toca las tarjetas para descubrir el ambiente.',
+        '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para descubrir el ambiente',
+        '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para descubrir el ambiente',
+        '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver info útil',
         '#precios .flip-hint': 'Pasa el cursor o toca las tarjetas para ver los detalles.',
       '#precios .subsection-title:nth-of-type(2)': 'Masajes y tratamientos',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Entrada diaria',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': 'Lunes a viernes',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-badge': 'Popular',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Entrada fin de semana',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': 'Sabados, Domingos y Festivos',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': 'Sábados, Domingos y Festivos',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Entrada',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Acceso general al local',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Valido de lunes a viernes',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(3)': '✓ Horario: 14:00 - 23:00',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepción',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-badge-back': 'Fin de semana',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(1)': '✓ Valido sabados, domingos y festivos',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(1)': '✓ Válido sábados, domingos y festivos',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Horario: 14:00 - 23:00',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ Acceso general al local',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Confirmar aforo por WhatsApp',
@@ -808,13 +601,11 @@ function getStaticTranslations(lang) {
       '#faq .faq-item:nth-child(3) .faq-question h3': '¿Hay normas de convivencia?',
       '#faq .faq-item:nth-child(4) .faq-question h3': '¿Cuál es vuestra política de desinfección?',
       '#faq .faq-item:nth-child(5) .faq-question h3': '¿Aceptáis grupos?',
-      '#faq .faq-item:nth-child(6) .faq-question h3': '¿Aceptáis parejas heterosexuales?',
       '#faq .faq-item:nth-child(1) .faq-answer p': 'Al llegar, presentas tu documentación en recepción, abonas la entrada y recibes tu llave de taquilla. El equipo te explica brevemente las zonas disponibles y las normas del local. A partir de ahí, puedes moverte con total autonomía. Te recomendamos llegar con tiempo suficiente para instalarte con calma y disfrutar al máximo de las instalaciones.',
       '#faq .faq-item:nth-child(2) .faq-answer p': 'Es imprescindible llevar documentación oficial válida: DNI, NIE o pasaporte. No se permite el acceso sin identificación. Recomendamos también traer chanclas para el uso de zonas húmedas. La toalla está disponible en el local. Si tienes alguna duda sobre qué incluye exactamente tu entrada, puedes consultarlo en recepción al llegar o antes por WhatsApp.',
       '#faq .faq-item:nth-child(3) .faq-answer p': 'El respeto mutuo es la base de todo. Está absolutamente prohibido fotografiar o grabar en cualquier zona del local. Es obligatorio ducharse antes de acceder a las zonas húmedas y usar la toalla sobre cualquier superficie. Cualquier interacción requiere consentimiento explícito. El personal está presente para garantizar la convivencia.',
       '#faq .faq-item:nth-child(4) .faq-answer p': 'Las instalaciones se limpian y desinfectan de forma periódica a lo largo del día. El uso de toalla sobre las superficies es obligatorio. Se exige ducha antes de acceder a la sauna, jacuzzi y piscina. Disponemos de productos de higiene en los aseos. Si tienes necesidades específicas o quieres más información, puedes consultarlo por WhatsApp antes de tu visita.',
-      '#faq .faq-item:nth-child(5) .faq-answer p': 'Sí, se admiten grupos, aunque recomendamos avisar con antelación para asegurar comodidad para todos. En días o franjas de mayor afluencia puede haber limitación de aforo. Consúltanos por WhatsApp indicando el número aproximado de personas y la franja horaria deseada.',
-      '#faq .faq-item:nth-child(6) .faq-answer p': 'Sauna Puerta de Toledo es un espacio orientado al público masculino. Para cualquier consulta específica sobre condiciones de acceso, escríbenos por WhatsApp antes de tu visita y te responderemos con toda la información actualizada.',
+      '#faq .faq-item:nth-child(5) .faq-answer p': 'No, no admitimos grupos. Queremos cuidar el ambiente del espacio y la comodidad de cada visita.',
       '.health .section-title': 'Seguridad & Salud',
       '.health .section-subtitle': 'Compromiso con la convivencia, el respeto y el cuidado',
       '.health-card:nth-child(1) h3': 'Garantia de Privacidad',
@@ -957,68 +748,10 @@ function openWhatsApp() {
 }
 
 // ========== Animaciones en Scroll ==========
-function observeElements() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
 
-  document.querySelectorAll('[data-observe]').forEach(el => {
-    observer.observe(el);
-  });
-}
 
 // ========== Efecto Parallax ==========
-function initParallax() {
-  window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('[data-parallax]');
 
-    parallaxElements.forEach(element => {
-      const speed = element.getAttribute('data-parallax') || 0.5;
-      element.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-  });
-}
-
-// ========== Counter Animation ==========
-function animateCounter(element, target, duration = 2000) {
-  let start = 0;
-  const increment = target / (duration / 16 );
-
-  const timer = setInterval(() => {
-    start += increment;
-    if (start >= target) {
-      element.textContent = target;
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.ceil(start);
-    }
-  }, 16 );
-}
-
-// ========== Form Validation ==========
-function validateForm(formElement) {
-  const inputs = formElement.querySelectorAll('input, textarea, select');
-  let isValid = true;
-
-  inputs.forEach(input => {
-    if (!input.value.trim()) {
-      isValid = false;
-      input.style.borderColor = '#e84c51';
-      input.style.boxShadow = '0 0 10px rgba(232, 76, 81, 0.3)';
-    } else {
-      input.style.borderColor = '#4ade80';
-    }
-  });
-
-  return isValid;
-}
 
 // ========== Modal Window ==========
 class Modal {
@@ -1055,25 +788,7 @@ class Modal {
   }
 }
 
-// ========== Lazy Loading Images ==========
-function initLazyLoading() {
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove('lazy');
-          imageObserver.unobserve(img);
-        }
-      });
-    });
 
-    document.querySelectorAll('img.lazy').forEach(img => {
-      imageObserver.observe(img);
-    });
-  }
-}
 
 // ========== Navbar Sticky Effect ==========
 function initStickyNavbar() {
@@ -1091,29 +806,6 @@ function initStickyNavbar() {
 
     lastScrollTop = scrollTop;
   });
-}
-
-// ========== Print Function ==========
-function printPage() {
-  window.print();
-}
-
-// ========== Share Function ==========
-function shareOnSocial(platform) {
-  const url = encodeURIComponent(window.location.href);
-  const title = encodeURIComponent(document.title);
-
-  const shareUrls = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-    twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
-    whatsapp: `https://wa.me/?text=${title}%20${url}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-    email: `mailto:?subject=${title}&body=${url}`
-  };
-
-  if (shareUrls[platform]) {
-    window.open(shareUrls[platform], '_blank', 'width=600,height=400');
-  }
 }
 
 // ========== Notification System ==========
@@ -1176,23 +868,10 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-// ========== Dark/Light Mode Toggle ==========
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-}
-
-// Cargar preferencia guardada
-if (localStorage.getItem('darkMode') === 'true') {
-  document.body.classList.add('dark-mode');
-}
-
 // ========== Inicializar funciones al cargar página ==========
 window.addEventListener('load', function() {
-  observeElements();
-  initParallax();
-  initLazyLoading();
-  initStickyNavbar();
+  runSafe(initStickyNavbar);
+  hideLoadingScreen();
 });
 
 // ========== Scroll Progress Bar ==========
@@ -1225,19 +904,19 @@ function initLightbox() {
       return {
         sauna: [
           { src: 'assets/images/gallery-sauna.jpg', caption: 'Sauna area' },
-          { src: 'assets/images/hero-1.jpg', caption: 'Sauna atmosphere' }
+          { src: 'assets/images/portada1.jpg', caption: 'Sauna atmosphere' }
         ],
         vapor: [
           { src: 'assets/images/gallery-vapor.jpg', caption: 'Steam bath' },
-          { src: 'assets/images/hero-2.jpg', caption: 'Steam area' }
+          { src: 'assets/images/poratda2.jpg', caption: 'Steam area' }
         ],
         jacuzzi: [
           { src: 'assets/images/gallery-jacuzzi.jpg', caption: 'Relaxing jacuzzi' },
-          { src: 'assets/images/hero-1.jpg', caption: 'Water and relax area' }
+          { src: 'assets/images/portada1.jpg', caption: 'Water and relax area' }
         ],
         tratamientos: [
           { src: 'assets/images/gallery-tratamientos.jpg', caption: 'Treatments' },
-          { src: 'assets/images/hero-2.jpg', caption: 'Treatment cabin' }
+          { src: 'assets/images/poratda2.jpg', caption: 'Treatment cabin' }
         ]
       };
     }
@@ -1245,19 +924,19 @@ function initLightbox() {
     return {
       sauna: [
         { src: 'assets/images/gallery-sauna.jpg', caption: 'Zona de sauna' },
-        { src: 'assets/images/hero-1.jpg', caption: 'Sauna y ambiente' }
+        { src: 'assets/images/portada1.jpg', caption: 'Sauna y ambiente' }
       ],
       vapor: [
         { src: 'assets/images/gallery-vapor.jpg', caption: 'Baño de vapor' },
-        { src: 'assets/images/hero-2.jpg', caption: 'Espacio de vapor' }
+        { src: 'assets/images/poratda2.jpg', caption: 'Espacio de vapor' }
       ],
       jacuzzi: [
         { src: 'assets/images/gallery-jacuzzi.jpg', caption: 'Jacuzzi relajante' },
-        { src: 'assets/images/hero-1.jpg', caption: 'Zona de agua y relax' }
+        { src: 'assets/images/portada1.jpg', caption: 'Zona de agua y relax' }
       ],
       tratamientos: [
         { src: 'assets/images/gallery-tratamientos.jpg', caption: 'Tratamientos' },
-        { src: 'assets/images/hero-2.jpg', caption: 'Cabina de tratamientos' }
+        { src: 'assets/images/poratda2.jpg', caption: 'Cabina de tratamientos' }
       ]
     };
   }
@@ -1555,44 +1234,6 @@ function initVisitTour() {
   });
 }
 
-// ========== First Visit Checklist ==========
-function initFirstVisitChecklist() {
-  const list = document.getElementById('checklist-list');
-  const counter = document.getElementById('checklist-counter');
-  const bar = document.getElementById('checklist-progress-bar');
-
-  if (!list || !counter || !bar) return;
-
-  const checkboxes = list.querySelectorAll('input[type="checkbox"]');
-
-  function updateChecklist() {
-    const done = Array.from(checkboxes).filter(cb => cb.checked).length;
-    const total = checkboxes.length;
-    const progress = total > 0 ? (done / total) * 100 : 0;
-    counter.textContent = `${done}/${total} completado`;
-    bar.style.width = `${progress}%`;
-  }
-
-  checkboxes.forEach(cb => cb.addEventListener('change', updateChecklist));
-  updateChecklist();
-}
-
-// ========== Weekend Visual Mode ==========
-function initWeekendVisualMode() {
-  const params = new URLSearchParams(window.location.search);
-  const forcedWeekend = params.get('weekend') === '1';
-  const forcedWeekday = params.get('weekend') === '0';
-
-  const now = new Date();
-  const day = now.getDay();
-  const hour = now.getHours();
-
-  const isWeekendBySchedule = day === 6 || day === 0 || (day === 5 && hour >= 18);
-  const shouldEnable = forcedWeekday ? false : (forcedWeekend || isWeekendBySchedule);
-
-  document.body.classList.toggle('weekend-theme', shouldEnable);
-}
-
 // ========== Saturday Event Mode ==========
 function initSaturdayEventMode() {
   const params = new URLSearchParams(window.location.search);
@@ -1603,7 +1244,7 @@ function initSaturdayEventMode() {
   const day = now.getDay();
   const hour = now.getHours();
 
-  // Sabado noche + madrugada inmediata del domingo
+  // Sábado noche + madrugada inmediata del domingo
   const isSaturdayNight = (day === 6 && hour >= 20) || (day === 0 && hour < 2);
   const shouldEnable = forcedNoEvent ? false : (forcedEvent || isSaturdayNight);
 
@@ -1613,7 +1254,7 @@ function initSaturdayEventMode() {
   const language = getCurrentLanguage();
   if (badge) {
     if (shouldEnable) {
-      badge.textContent = language === 'en' ? 'Saturday Night / Event Mode' : 'Sabado Noche / Event Mode';
+      badge.textContent = language === 'en' ? 'Saturday Night / Event Mode' : 'Sábado Noche / Event Mode';
       badge.classList.add('visible');
     } else {
       badge.classList.remove('visible');
@@ -1629,7 +1270,7 @@ function initSaturdayEventMode() {
     if (heroSubtitle) {
       heroSubtitle.textContent = language === 'en'
         ? 'Saturday night: more active atmosphere, we recommend confirming capacity on WhatsApp'
-        : 'Sabado noche: ambiente mas activo, recomendamos confirmar aforo por WhatsApp';
+        : 'Sábado noche: ambiente más activo, recomendamos confirmar aforo por WhatsApp';
     }
     if (heroPrimaryBtn) {
       heroPrimaryBtn.textContent = language === 'en' ? 'See night plan' : 'Ver plan noche';
@@ -1642,67 +1283,6 @@ function initSaturdayEventMode() {
       heroSecondaryBtn.textContent = language === 'en' ? 'Confirm capacity now' : 'Confirmar aforo ahora';
     }
   }
-}
-
-// ========== Utilities ==========
-
-// Debounce function
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Throttle function
-function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
-}
-
-// Get query parameter
-function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
-
-// Format currency
-function formatCurrency(amount, currency = 'EUR') {
-  return new Intl.NumberFormat('es-ES', {
-    style: 'currency',
-    currency: currency
-  }).format(amount);
-}
-
-// ========== Console Log Prevention (Opcional) ==========
-// Uncomment para producción
-/*
-console.log = function() {};
-console.error = function() {};
-console.warn = function() {};
-*/
-
-// Export para uso en otros scripts
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    scrollToTop,
-    openWhatsApp,
-    acceptCookies,
-    declineCookies,
-    formatCurrency,
-    debug: true
-  };
 }
 
 
