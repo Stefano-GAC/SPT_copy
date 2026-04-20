@@ -49,7 +49,7 @@ function initNavbarOpacity() {
 
   window.addEventListener('scroll', function() {
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    const threshold = 50; // px desde el top
+    const threshold = 50 ; // px desde el top
 
     // Si estamos muy arriba (sin imagen detrás), navbar más opaco
     if (scrollY < threshold) {
@@ -189,18 +189,18 @@ function initScheduleCards() {
       openMinutes: 14 * 60,
       closeMinutes: 23 * 60,
       peakWindow: {
-        es: 'Franja con más movimiento: 18:30 - 21:30',
-        en: 'Busiest slot: 6:30 PM - 9:30 PM'
+        es: 'Franja con más movimiento: 18:30  - 21:30 ',
+        en: 'Busiest slot: 6:30  PM - 9:30  PM'
       },
       helperCopy: {
         es: 'Elige franjas con más movimiento y aprovecha espacios comunes para una visita más dinámica.',
         en: 'Choose busier time slots and make the most of shared areas for a more dynamic visit.'
       },
       periods: [
-        { start: 14 * 60, end: 16 * 60 + 30, level: 'calm' },
-        { start: 16 * 60 + 30, end: 18 * 60 + 30, level: 'steady' },
-        { start: 18 * 60 + 30, end: 21 * 60 + 30, level: 'peak' },
-        { start: 21 * 60 + 30, end: 23 * 60, level: 'steady' }
+        { start: 14 * 60, end: 16  * 60 + 30 , level: 'calm' },
+        { start: 16  * 60 + 30 , end: 18 * 60 + 30 , level: 'steady' },
+        { start: 18 * 60 + 30 , end: 21 * 60 + 30 , level: 'peak' },
+        { start: 21 * 60 + 30 , end: 23 * 60, level: 'steady' }
       ]
     },
     weekend: {
@@ -494,7 +494,7 @@ function getStaticTranslations(lang) {
       nav_book: 'Book'
     } : {
       nav_home: 'Inicio',
-      nav_about: 'Sobre Nosotros',
+      nav_about: 'Sobre nosotros',
       nav_facilities: 'Instalaciones',
       nav_hours: 'Horarios',
       nav_prices: 'Tarifas',
@@ -606,12 +606,12 @@ function getStaticTranslations(lang) {
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ General access to the venue',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Confirm capacity on WhatsApp',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Express Massage',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': '30 minutes',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': '30  minutes',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-badge': 'Recommended',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Full Massage',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': '1 hour',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Express',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duration: 30 minutes',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duration: 30  minutes',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Massage service',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(3)': '✓ Recommended reservation',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Conditions at reception',
@@ -681,74 +681,74 @@ function getStaticTranslations(lang) {
       '.cookie-accept': 'Accept all'
     } : {
       '.hero-title': 'Tu Espacio Intimo',
-      '.hero-subtitle': 'Espacio de bienestar y encuentro en Madrid centro',
-      '.hero-ctas .btn-primary': 'Ver Precios',
+      '.hero-subtitle': 'Espacio de bienestar y encuentro en Madrid centro.',
+      '.hero-ctas .btn-primary': 'Ver precios',
       '.hero-ctas .btn-secondary': 'Consultar por WhatsApp',
       '.experience-mode .section-title': 'Elige tu experiencia',
-      '.experience-mode .section-subtitle': 'Adapta la experiencia segun como quieres sentir tu visita hoy',
+      '.experience-mode .section-subtitle': 'Adapta la experiencia según cómo quieres sentir tu visita hoy.',
       '#experience-chips .chip[data-mode="relax"]': 'Relax',
       '#experience-chips .chip[data-mode="social"]': 'Social',
       '#experience-chips .chip[data-mode="massage"]': 'Masaje',
       '.journey .section-title': 'Una visita en 3 momentos',
-      '.journey .section-subtitle': 'Un recorrido claro para anticipar cada sensacion desde tu llegada',
+      '.journey .section-subtitle': 'Un recorrido claro para anticipar cada sensación desde tu llegada.',
       '.journey-step:nth-child(1) h3': 'Llegas',
-      '.journey-step:nth-child(1) p': 'Acceso en recepcion, bienvenida agil y orientacion breve para que elijas tu ritmo desde el primer minuto.',
+      '.journey-step:nth-child(1) p': 'Acceso en recepción, bienvenida ágil y orientación breve para que elijas tu ritmo desde el primer minuto.',
       '.journey-step:nth-child(2) h3': 'Desconectas',
-      '.journey-step:nth-child(2) p': 'Recorre sauna, vapor y jacuzzi para bajar pulsaciones, soltar tension y entrar en modo pausa.',
+      '.journey-step:nth-child(2) p': 'Recorre sauna, vapor y jacuzzi para bajar pulsaciones, soltar tensión y entrar en modo pausa.',
       '.journey-step:nth-child(3) h3': 'Recargas',
-      '.journey-step:nth-child(3) p': 'Cierra en zonas de descanso con sensacion de calma, claridad y energia renovada.',
-      '#nosotros .section-title': 'Sobre Nosotros',
-      '#nosotros .section-subtitle': 'Informacion clara y actualizada para tu visita',
-      '#nosotros .about-card:nth-child(1) h3': 'Especialistas en Bienestar',
-      '#nosotros .about-card:nth-child(1) p': 'Un entorno pensado para el descanso, la desconexion y el bienestar personal.',
-      '#nosotros .about-card:nth-child(2) h3': 'Privacidad y Discrecion',
-      '#nosotros .about-card:nth-child(2) p': 'Trabajamos con enfoque en discrecion, respeto y trato profesional en todo momento.',
-      '#nosotros .about-card:nth-child(3) h3': 'Atencion Profesional',
-      '#nosotros .about-card:nth-child(3) p': 'Equipo disponible para resolver dudas y acompanarte durante tu visita.',
-      '#instalaciones .section-title': 'Nuestras Instalaciones',
+      '.journey-step:nth-child(3) p': 'Cierra en zonas de descanso con sensación de calma, claridad y energía renovada.',
+      '#nosotros .section-title': 'Sobre nosotros',
+      '#nosotros .section-subtitle': 'Información clara y actualizada para tu visita',
+      '#nosotros .about-card:nth-child(1) h3': 'Especialistas en bienestar',
+      '#nosotros .about-card:nth-child(1) p': 'Un entorno pensado para el descanso, la desconexión y el bienestar personal.',
+      '#nosotros .about-card:nth-child(2) h3': 'Privacidad y discreción',
+      '#nosotros .about-card:nth-child(2) p': 'Trabajamos con enfoque en discreción, respeto y trato profesional en todo momento.',
+      '#nosotros .about-card:nth-child(3) h3': 'Atención profesional',
+      '#nosotros .about-card:nth-child(3) p': 'Equipo disponible para resolver dudas y acompañarte durante tu visita.',
+      '#instalaciones .section-title': 'Nuestras instalaciones',
       '#instalaciones .section-subtitle': 'Servicios destacados del espacio',
-      '#instalaciones .facility-card:nth-child(1) h3': 'Sauna Finlandesa',
-      '#instalaciones .facility-card:nth-child(1) p': 'Zona de sauna para relajacion y bienestar.',
-      '#instalaciones .facility-card:nth-child(2) h3': 'Bano de Vapor',
-      '#instalaciones .facility-card:nth-child(2) p': 'Zona de vapor disponible en el recorrido del local.',
+      '#instalaciones .facility-card:nth-child(1) h3': 'Sauna finlandesa',
+      '#instalaciones .facility-card:nth-child(1) p': 'Zona de sauna para relajación y bienestar.',
+      '#instalaciones .facility-card:nth-child(2) h3': 'Baño de vapor',
+      '#instalaciones .facility-card:nth-child(2) p': 'Zona de vapor disponible en el recorrido del local',
       '#instalaciones .facility-card:nth-child(3) h3': 'Jacuzzi',
-      '#instalaciones .facility-card:nth-child(3) p': 'Zona de agua para descanso y relax.',
-      '#instalaciones .facility-card:nth-child(4) h3': 'Cabinas Privadas',
-      '#instalaciones .facility-card:nth-child(4) p': 'Espacios de uso privado. Consulta condiciones en recepcion.',
-      '#instalaciones .facility-card:nth-child(5) h3': 'Bar y Lounge',
-      '#instalaciones .facility-card:nth-child(5) p': 'Zona de descanso para pausas durante la visita.',
-      '#instalaciones .facility-card:nth-child(6) h3': 'Masajes Profesionales',
+      '#instalaciones .facility-card:nth-child(3) p': 'Zona de agua para descanso y relax',
+      '#instalaciones .facility-card:nth-child(4) h3': 'Cabinas privadas',
+      '#instalaciones .facility-card:nth-child(4) p': 'Espacios de uso privado. Consulta condiciones en recepción.',
+      '#instalaciones .facility-card:nth-child(5) h3': 'Bar y lounge',
+      '#instalaciones .facility-card:nth-child(5) p': 'Zona de descanso para pausas durante la visita',
+      '#instalaciones .facility-card:nth-child(6) h3': 'Masajes profesionales',
       '#instalaciones .facility-card:nth-child(6) p': 'Servicio de masaje disponible bajo consulta.',
-      '.tour .section-title': 'Tour rapido del espacio',
+      '.tour .section-title': 'Tour rápido del espacio',
       '.tour .section-subtitle': 'Vista previa visual para conocer el ritmo del recorrido antes de venir',
       '#tour-prev': 'Anterior',
       '#tour-next': 'Siguiente',
       '#horarios .section-title': 'Horarios',
-      '#horarios .section-subtitle': 'Horario actual: todos los dias de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.',
+      '#horarios .section-subtitle': 'Horario actual: todos los días de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.',
       '#horarios .flip-hint': 'Haz click en las tarjetas para ver el nivel de movimiento por franja',
         '#horarios .flip-hint': 'Hover over or tap the cards to see the activity level by time slot.',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Lunes a Jueves',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'Ritmo mas relajado',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Lunes a jueves',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'Ritmo más relajado',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
         '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-back-title': 'Movimiento estimado',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
-      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(3)': 'Mas movimiento',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front h3': 'Viernes a Domingo',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .schedule-note': 'Mas ambiente social',
+      '#horarios .schedule-card-flip:nth-child(1) .schedule-legend-item:nth-child(3)': 'Más movimiento',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front h3': 'Viernes a domingo',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .schedule-note': 'Más ambiente social',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Click para ver movimiento',
         '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Hover or tap to see activity',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-back-title': 'Movimiento estimado',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(1)': 'Menos movimiento',
       '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(2)': 'Movimiento medio',
-      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(3)': 'Mas movimiento',
+      '#horarios .schedule-card-flip:nth-child(2) .schedule-legend-item:nth-child(3)': 'Más movimiento',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front h3': 'Contacto',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .schedule-note': 'Centro de Madrid',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Click para ver info util',
         '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Hover or tap to see useful info',
       '#horarios .schedule-card-flip:nth-child(3) .schedule-back-title': 'Antes de venir',
-      '#horarios .schedule-card-flip:nth-child(3) .schedule-directions': '📲 Confirma disponibilidad por WhatsApp\n🪪 Trae documentacion valida\n🕒 Ven con tiempo para disfrutar mejor',
+      '#horarios .schedule-card-flip:nth-child(3) .schedule-directions': '📲 Confirma disponibilidad por WhatsApp\n🪪 Trae documentación válida\n🕒 Ven con tiempo para disfrutar mejor',
       '#precios .section-title': 'Tarifas',
       '#precios .subsection-title:nth-of-type(1)': 'Entrada General',
       '#precios .flip-hint': 'Haz click en las tarjetas para ver los detalles',
@@ -759,94 +759,94 @@ function getStaticTranslations(lang) {
         '#horarios .schedule-card-flip:nth-child(2) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver movimiento',
         '#horarios .schedule-card-flip:nth-child(3) .schedule-card-front .click-hint': '◆ Pasa el cursor o toca para ver info util',
         '#precios .flip-hint': 'Pasa el cursor o toca las tarjetas para ver los detalles.',
-      '#precios .subsection-title:nth-of-type(2)': 'Masajes y Tratamientos',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Entrada Diaria',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': 'Lunes a Viernes',
+      '#precios .subsection-title:nth-of-type(2)': 'Masajes y tratamientos',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Entrada diaria',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': 'Lunes a viernes',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-badge': 'Popular',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Entrada Fin de Semana',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Entrada fin de semana',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': 'Sabados, Domingos y Festivos',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Entrada',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Acceso general al local',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Valido de lunes a viernes',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(3)': '✓ Horario: 14:00-23:00',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepcion',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-badge-back': 'Fin de Semana',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(3)': '✓ Horario: 14:00 - 23:00',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepción',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-badge-back': 'Fin de semana',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(1)': '✓ Valido sabados, domingos y festivos',
-      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Horario: 14:00-23:00',
+      '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Horario: 14:00 - 23:00',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ Acceso general al local',
       '#precios .prices-grid:first-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Confirmar aforo por WhatsApp',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Masaje Express',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': '30 minutos',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front h4': 'Masaje express',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-front .price-desc': '30  minutos',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-badge': 'Recomendado',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Masaje Completo',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front h4': 'Masaje completo',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-front .price-desc': '1 hora',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-badge-back': 'Express',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duracion: 30 minutos',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(1)': '✓ Duracion: 30  minutos',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(2)': '✓ Servicio de masaje',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(3)': '✓ Reserva recomendada',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepcion',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(1) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepción',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-badge-back': 'Completo',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(1)': '✓ Duracion: 1 hora',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(2)': '✓ Servicio de masaje',
       '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(3)': '✓ Reserva recomendada',
-      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepcion',
+      '#precios .prices-grid:last-of-type .price-card-flip:nth-child(2) .price-card-back .price-features li:nth-child(4)': '✓ Condiciones en recepción',
       '.price-card-front .click-hint': '◆ Pasa el cursor o toca para ver detalles',
       '.manifesto-kicker': 'SPT / Madrid centro',
       '.manifesto-box h2': 'Un lugar para bajar el ruido y recuperar tu energia.',
-      '.manifesto-box > p:not(.manifesto-kicker)': 'Creemos en el bienestar con discrecion, en el respeto como principio y en una experiencia que se recuerda por como te hace sentir.',
+      '.manifesto-box > p:not(.manifesto-kicker)': 'Creemos en el bienestar con discreción, en el respeto como principio y en una experiencia que se recuerda por cómo te hace sentir.',
       '.manifesto-box .btn': 'Reservar por WhatsApp',
       '#galeria .section-title': 'Galeria',
       '#galeria .section-subtitle': 'Explora nuestro espacio',
       '.gallery-item[data-zone="sauna"] .gallery-overlay p': 'Zona de sauna',
-      '.gallery-item[data-zone="vapor"] .gallery-overlay p': 'Bano de Vapor',
-      '.gallery-item[data-zone="jacuzzi"] .gallery-overlay p': 'Jacuzzi Relajante',
+      '.gallery-item[data-zone="vapor"] .gallery-overlay p': 'Baño de vapor',
+      '.gallery-item[data-zone="jacuzzi"] .gallery-overlay p': 'Jacuzzi relajante',
       '.gallery-item[data-zone="tratamientos"] .gallery-overlay p': 'Tratamientos',
-      '#faq .section-title': 'Preguntas Frecuentes',
-      '#faq .section-subtitle': 'Informacion util para preparar tu visita',
-      '#faq .faq-item:nth-child(1) .faq-question h3': 'Como es mi primera visita?',
-      '#faq .faq-item:nth-child(2) .faq-question h3': 'Que debo llevar?',
-      '#faq .faq-item:nth-child(3) .faq-question h3': 'Hay normas de convivencia?',
-      '#faq .faq-item:nth-child(4) .faq-question h3': 'Cual es vuestra politica de desinfeccion?',
-      '#faq .faq-item:nth-child(5) .faq-question h3': 'Aceptais grupos?',
-      '#faq .faq-item:nth-child(6) .faq-question h3': 'Aceptais parejas heterosexuales?',
-      '#faq .faq-item:nth-child(1) .faq-answer p': 'Al llegar, presentas tu documentacion en recepcion, abonas la entrada y recibes tu llave de taquilla. El equipo te explica brevemente las zonas disponibles y las normas del local. A partir de ahi puedes moverte con total autonomia. Te recomendamos llegar con tiempo suficiente para instalarte con calma y disfrutar al maximo de las instalaciones.',
-      '#faq .faq-item:nth-child(2) .faq-answer p': 'Es imprescindible llevar documentacion oficial valida: DNI, NIE o pasaporte. No se permite el acceso sin identificacion. Recomendamos tambien traer chanclas para el uso de zonas humedas. La toalla esta disponible en el local. Si tienes alguna duda sobre que incluye exactamente tu entrada, puedes consultarlo en recepcion al llegar o antes por WhatsApp.',
-      '#faq .faq-item:nth-child(3) .faq-answer p': 'El respeto mutuo es la base de todo. Esta absolutamente prohibido fotografiar o grabar en cualquier zona del local. Es obligatorio ducharse antes de acceder a las zonas humedas y usar la toalla sobre cualquier superficie. Cualquier interaccion requiere consentimiento explicito. El personal esta presente para garantizar la convivencia.',
-      '#faq .faq-item:nth-child(4) .faq-answer p': 'Las instalaciones se limpian y desinfectan de forma periodica a lo largo del dia. El uso de toalla sobre las superficies es obligatorio. Se exige ducha antes de acceder a la sauna, jacuzzi y piscina. Disponemos de productos de higiene en los aseos. Si tienes necesidades especificas o quieres mas informacion, puedes consultarlo por WhatsApp antes de tu visita.',
-      '#faq .faq-item:nth-child(5) .faq-answer p': 'Si, se admiten grupos, aunque recomendamos avisar con antelacion para asegurar comodidad para todos. En dias o franjas de mayor afluencia puede haber limitacion de aforo. Consultanos por WhatsApp indicando el numero aproximado de personas y la franja horaria deseada.',
-      '#faq .faq-item:nth-child(6) .faq-answer p': 'Sauna Puerta de Toledo es un espacio orientado al publico masculino. Para cualquier consulta especifica sobre condiciones de acceso, escribenos por WhatsApp antes de tu visita y te respondemos con toda la informacion actualizada.',
+      '#faq .section-title': 'Preguntas frecuentes',
+      '#faq .section-subtitle': 'Información útil para preparar tu visita',
+      '#faq .faq-item:nth-child(1) .faq-question h3': '¿Cómo es mi primera visita?',
+      '#faq .faq-item:nth-child(2) .faq-question h3': '¿Qué debo llevar?',
+      '#faq .faq-item:nth-child(3) .faq-question h3': '¿Hay normas de convivencia?',
+      '#faq .faq-item:nth-child(4) .faq-question h3': '¿Cuál es vuestra política de desinfección?',
+      '#faq .faq-item:nth-child(5) .faq-question h3': '¿Aceptáis grupos?',
+      '#faq .faq-item:nth-child(6) .faq-question h3': '¿Aceptáis parejas heterosexuales?',
+      '#faq .faq-item:nth-child(1) .faq-answer p': 'Al llegar, presentas tu documentación en recepción, abonas la entrada y recibes tu llave de taquilla. El equipo te explica brevemente las zonas disponibles y las normas del local. A partir de ahí, puedes moverte con total autonomía. Te recomendamos llegar con tiempo suficiente para instalarte con calma y disfrutar al máximo de las instalaciones.',
+      '#faq .faq-item:nth-child(2) .faq-answer p': 'Es imprescindible llevar documentación oficial válida: DNI, NIE o pasaporte. No se permite el acceso sin identificación. Recomendamos también traer chanclas para el uso de zonas húmedas. La toalla está disponible en el local. Si tienes alguna duda sobre qué incluye exactamente tu entrada, puedes consultarlo en recepción al llegar o antes por WhatsApp.',
+      '#faq .faq-item:nth-child(3) .faq-answer p': 'El respeto mutuo es la base de todo. Está absolutamente prohibido fotografiar o grabar en cualquier zona del local. Es obligatorio ducharse antes de acceder a las zonas húmedas y usar la toalla sobre cualquier superficie. Cualquier interacción requiere consentimiento explícito. El personal está presente para garantizar la convivencia.',
+      '#faq .faq-item:nth-child(4) .faq-answer p': 'Las instalaciones se limpian y desinfectan de forma periódica a lo largo del día. El uso de toalla sobre las superficies es obligatorio. Se exige ducha antes de acceder a la sauna, jacuzzi y piscina. Disponemos de productos de higiene en los aseos. Si tienes necesidades específicas o quieres más información, puedes consultarlo por WhatsApp antes de tu visita.',
+      '#faq .faq-item:nth-child(5) .faq-answer p': 'Sí, se admiten grupos, aunque recomendamos avisar con antelación para asegurar comodidad para todos. En días o franjas de mayor afluencia puede haber limitación de aforo. Consúltanos por WhatsApp indicando el número aproximado de personas y la franja horaria deseada.',
+      '#faq .faq-item:nth-child(6) .faq-answer p': 'Sauna Puerta de Toledo es un espacio orientado al público masculino. Para cualquier consulta específica sobre condiciones de acceso, escríbenos por WhatsApp antes de tu visita y te responderemos con toda la información actualizada.',
       '.health .section-title': 'Seguridad & Salud',
       '.health .section-subtitle': 'Compromiso con la convivencia, el respeto y el cuidado',
       '.health-card:nth-child(1) h3': 'Garantia de Privacidad',
-      '.health-card:nth-child(1) p': 'Compromiso de discrecion y respeto a la privacidad de las personas usuarias.',
+      '.health-card:nth-child(1) p': 'Compromiso de discreción y respeto a la privacidad de las personas usuarias.',
       '.health-card:nth-child(2) h3': 'Practicas Seguras',
       '.health-card:nth-child(2) p': 'Promovemos informacion de prevencion y cuidado personal para una experiencia responsable.',
       '.health-card:nth-child(3) h3': 'Certificaciones',
       '.health-card:nth-child(3) p': 'Actividad sujeta a normativa vigente. Para informacion documental especifica, consulta en el propio local.',
       '.health-card:nth-child(4) h3': 'Personal Entrenado',
       '.health-card:nth-child(4) p': 'Personal de apoyo durante el horario de apertura para atencion y convivencia.',
-      '#contacto .section-title': 'Ubicacion & Contacto',
-      '#contacto .section-subtitle': 'Estamos en Madrid centro, con acceso comodo en transporte publico',
-      '#contacto .contact-card:nth-child(1) h3': 'Direccion',
+      '#contacto .section-title': 'Ubicación y contacto',
+      '#contacto .section-subtitle': 'Estamos en Madrid centro, con acceso cómodo en transporte público.',
+      '#contacto .contact-card:nth-child(1) h3': 'Dirección',
       '#contacto .contact-card:nth-child(1) p': 'Cuesta de las Descargas, 6 - 28005 Madrid, Espana',
       '#contacto .contact-card:nth-child(1) .contact-note': 'Centro de Madrid, junto a Puerta de Toledo',
-      '#contacto .contact-card:nth-child(2) h3': 'Como llegar',
-      '#contacto .contact-card:nth-child(2) p': 'Puerta de Toledo / La Latina - Acceso rapido desde el centro',
-      '#contacto .contact-card:nth-child(2) .contact-note': 'Zona bien conectada en Metro y bus',
+      '#contacto .contact-card:nth-child(2) h3': 'Cómo llegar',
+      '#contacto .contact-card:nth-child(2) p': 'Puerta de Toledo / La Latina. Acceso rápido desde el centro.',
+      '#contacto .contact-card:nth-child(2) .contact-note': 'Zona bien conectada en metro y bus',
       '#contacto .contact-card:nth-child(3) h3': 'Contacto',
       '#contacto .contact-card:nth-child(3) .btn': 'WhatsApp',
       '.footer-section:nth-child(1) p': 'Espacio de bienestar y encuentro en Madrid centro.',
-      '.footer-section:nth-child(2) h4': 'Enlaces Rapidos',
-      '.footer-section:nth-child(3) h4': 'Siguenos',
+      '.footer-section:nth-child(2) h4': 'Enlaces rápidos',
+      '.footer-section:nth-child(3) h4': 'Síguenos',
       '.footer-section:nth-child(2) li:nth-child(1) a': 'Precios',
       '.footer-section:nth-child(2) li:nth-child(2) a': 'Horarios',
       '.footer-section:nth-child(2) li:nth-child(3) a': 'FAQ',
       '.footer-section:nth-child(2) li:nth-child(4) a': 'Contacto',
       '.footer-bottom > p': '© 2025 Sauna Puerta de Toledo. Todos los derechos reservados.',
-      '.footer-links a:nth-child(1)': 'Politica de Privacidad',
-      '.footer-links a:nth-child(2)': 'Aviso Legal',
-      '.footer-links a:nth-child(3)': 'Politica de Cookies',
-      '#cookie-desc': '&#127850; Utilizamos cookies propias para mejorar la experiencia de navegacion. Al continuar navegando aceptas su uso. <a href="#" class="cookie-link">Politica de cookies</a>.',
+      '.footer-links a:nth-child(1)': 'Política de privacidad',
+      '.footer-links a:nth-child(2)': 'Aviso legal',
+      '.footer-links a:nth-child(3)': 'Política de cookies',
+      '#cookie-desc': '&#127850; Utilizamos cookies propias para mejorar la experiencia de navegación. Al continuar navegando, aceptas su uso. <a href="#" class="cookie-link">Política de cookies</a>.',
       '.cookie-decline': 'Solo esenciales',
       '.cookie-accept': 'Aceptar todas'
     },
@@ -873,8 +873,8 @@ function getStaticTranslations(lang) {
       { selector: '#lightbox-next', attr: 'aria-label', value: 'Siguiente' },
       { selector: '#whatsapp-btn', attr: 'title', value: 'Chat por WhatsApp' },
       { selector: '.gallery-item[data-zone="sauna"]', attr: 'data-caption', value: 'Zona de sauna' },
-      { selector: '.gallery-item[data-zone="vapor"]', attr: 'data-caption', value: 'Bano de Vapor' },
-      { selector: '.gallery-item[data-zone="jacuzzi"]', attr: 'data-caption', value: 'Jacuzzi Relajante' },
+      { selector: '.gallery-item[data-zone="vapor"]', attr: 'data-caption', value: 'Baño de vapor' },
+      { selector: '.gallery-item[data-zone="jacuzzi"]', attr: 'data-caption', value: 'Jacuzzi relajante' },
       { selector: '.gallery-item[data-zone="tratamientos"]', attr: 'data-caption', value: 'Tratamientos' }
     ]
   };
@@ -989,7 +989,7 @@ function initParallax() {
 // ========== Counter Animation ==========
 function animateCounter(element, target, duration = 2000) {
   let start = 0;
-  const increment = target / (duration / 16);
+  const increment = target / (duration / 16 );
 
   const timer = setInterval(() => {
     start += increment;
@@ -999,7 +999,7 @@ function animateCounter(element, target, duration = 2000) {
     } else {
       element.textContent = Math.ceil(start);
     }
-  }, 16);
+  }, 16 );
 }
 
 // ========== Form Validation ==========
@@ -1248,7 +1248,7 @@ function initLightbox() {
         { src: 'assets/images/hero-1.jpg', caption: 'Sauna y ambiente' }
       ],
       vapor: [
-        { src: 'assets/images/gallery-vapor.jpg', caption: 'Bano de vapor' },
+        { src: 'assets/images/gallery-vapor.jpg', caption: 'Baño de vapor' },
         { src: 'assets/images/hero-2.jpg', caption: 'Espacio de vapor' }
       ],
       jacuzzi: [
@@ -1279,7 +1279,7 @@ function initLightbox() {
   function closeLightbox() {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
-    setTimeout(() => { img.src = ''; }, 350);
+    setTimeout(() => { img.src = ''; }, 350 );
   }
 
   function navigate(dir) {
@@ -1400,8 +1400,8 @@ function initExperienceMode() {
 
     return {
       relax: {
-        title: 'Plan Relax',
-        description: 'Empieza por bano de vapor, continua con jacuzzi y termina en zona lounge para una desconexion completa.',
+        title: 'Plan relax',
+        description: 'Empieza por baño de vapor, continúa con jacuzzi y termina en zona lounge para una desconexión completa.',
         ctaText: 'Ver recorrido relax',
         targetId: 'instalaciones',
         heroText: 'Experiencia orientada a relajación y bienestar en Madrid centro',
@@ -1497,18 +1497,18 @@ function initVisitTour() {
 
     return [
       {
-        title: 'Recepcion y acceso',
-        description: 'Llegada al local, validacion de acceso y orientacion inicial para empezar el recorrido.',
+        title: 'Recepción y acceso',
+        description: 'Llegada al local, validación de acceso y orientación inicial para empezar el recorrido.',
         image: 'assets/images/gallery-sauna.jpg'
       },
       {
         title: 'Zona de vapor',
-        description: 'Ideal para comenzar y preparar el cuerpo con calor humedo progresivo.',
+        description: 'Ideal para comenzar y preparar el cuerpo con calor húmedo progresivo.',
         image: 'assets/images/gallery-vapor.jpg'
       },
       {
-        title: 'Jacuzzi y recuperacion',
-        description: 'Fase de relajacion profunda para liberar tension y recuperar energia.',
+        title: 'Jacuzzi y recuperación',
+        description: 'Fase de relajación profunda para liberar tensión y recuperar energía.',
         image: 'assets/images/gallery-jacuzzi.jpg'
       },
       {
@@ -1704,5 +1704,7 @@ if (typeof module !== 'undefined' && module.exports) {
     debug: true
   };
 }
+
+
 
 
