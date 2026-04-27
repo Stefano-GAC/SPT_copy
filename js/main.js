@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initLanguageToggle();
   initCookieBanner();
   initExperienceMode();
+  initVisitGuidance();
+  initFirstVisitChecklist();
   initVisitTour();
   initSaturdayEventMode();
 
@@ -521,7 +523,7 @@ function getStaticTranslations(lang) {
       '#horarios .section-title': 'Horarios',
       '#horarios .section-subtitle': 'Horario actual: todos los días de 14:00 a 23:00. Recomendamos confirmar por WhatsApp antes de tu visita.',
       '#horarios .flip-hint': 'Haz click en las tarjetas para descubrir el ambiente',
-        '#horarios .flip-hint': 'Hover over or tap the cards to see the activity level by time slot.',
+        '#horarios .flip-hint': 'Hover over or tap the cards to discover the atmosphere.',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front h3': 'Lunes a jueves',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .schedule-note': 'Ritmo más relajado',
       '#horarios .schedule-card-flip:nth-child(1) .schedule-card-front .click-hint': '◆ Click para descubrir el ambiente',
@@ -1060,11 +1062,11 @@ function initExperienceMode() {
         },
         social: {
           title: 'Social Plan',
-          description: 'Choose busier time slots and use shared spaces for a more active visit.',
-          ctaText: 'See recommended slots',
+          description: 'Choose a more active day and use shared spaces for a social visit.',
+          ctaText: 'See opening hours',
           targetId: 'horarios',
-          heroText: 'Social space with active atmosphere and busier slots',
-          heroBtn: 'Ask for social slot'
+          heroText: 'Social space with an active atmosphere and shared-energy moments',
+          heroBtn: 'Ask for social plan'
         },
         massage: {
           title: 'Massage Plan',
@@ -1088,11 +1090,11 @@ function initExperienceMode() {
       },
       social: {
         title: 'Plan Social',
-        description: 'Elige franjas con mas movimiento y aprovecha espacios comunes para una visita mas dinamica.',
-        ctaText: 'Ver franjas recomendadas',
+        description: 'Elige días con más movimiento y aprovecha espacios comunes para una visita más dinámica.',
+        ctaText: 'Ver horarios',
         targetId: 'horarios',
-        heroText: 'Espacio social con franjas de mayor movimiento y ambiente activo',
-        heroBtn: 'Consultar franja social'
+        heroText: 'Espacio social con ambiente activo y momentos de conexión',
+        heroBtn: 'Consultar plan social'
       },
       massage: {
         title: 'Plan Masaje',
@@ -1135,6 +1137,155 @@ function initExperienceMode() {
   document.addEventListener('languagechange', function() {
     applyMode(currentMode);
   });
+}
+
+function initVisitGuidance() {
+  const content = {
+    en: {
+      heroPriorityKicker: 'Start here',
+      heroPriorityTitle: 'Your visit in 3 beats',
+      heroPriorityText: 'One elegant guide to understand how your visit begins, how it flows inside, and what is worth preparing before you come.',
+      priorityStep1: '01 · You arrive',
+      priorityLabel1: 'Confirm before you leave',
+      priorityCaption1: 'WhatsApp helps you validate availability and solve questions before you leave',
+      priorityStep2: '02 · You unwind',
+      priorityLabel2: 'Choose the pace of your visit',
+      priorityCaption2: 'Check opening hours and decide whether you want a quieter or a more social atmosphere',
+      priorityStep3: '03 · You recharge',
+      priorityLabel3: 'Close the plan clearly',
+      priorityCaption3: 'Choose entry or massage, bring valid ID, and arrive with enough time to enjoy the space',
+      heroFact1: 'Current schedule: 2:00 PM to 11:00 PM',
+      heroFact2: 'Valid ID required',
+      heroFact3: 'WhatsApp confirmation recommended before coming',
+      firstVisitTitle: 'Prepare your first visit',
+      firstVisitSubtitle: '80% of what matters is covered by three quick checks before you leave.',
+      visitPriorityKicker: 'Recommendation',
+      visitPriorityTitle: 'If it is your first time, start with a weekday visit',
+      visitPriorityText: 'The pace is usually calmer, arrival feels simpler and staff guidance is easier to follow.',
+      visitPriorityPoint1: 'Recommended for first visits: come with enough time and no rush',
+      visitPriorityPoint2: 'Valid ID is mandatory at reception',
+      visitPriorityPoint3: 'Confirm availability on WhatsApp before you travel',
+      visitPriorityCta: 'See opening hours',
+      checklistItem1: 'I have confirmed schedule and availability on WhatsApp',
+      checklistItem2: 'I already know which entry or service fits my visit best',
+      checklistItem3: 'I am bringing valid ID and enough time to arrive calmly'
+    },
+    es: {
+      heroPriorityKicker: 'Empieza aquí',
+      heroPriorityTitle: 'Tu visita en 3 tiempos',
+      heroPriorityText: 'Una sola guía para entender cómo empieza tu visita, cómo se vive dentro y qué conviene dejar listo antes de venir.',
+      priorityStep1: '01 · Llegas',
+      priorityLabel1: 'Confirma antes de salir',
+      priorityCaption1: 'WhatsApp te ayuda a validar disponibilidad y resolver dudas antes de salir',
+      priorityStep2: '02 · Desconectas',
+      priorityLabel2: 'Elige el ritmo de tu visita',
+      priorityCaption2: 'Consulta horarios y decide si prefieres un ambiente más tranquilo o más social',
+      priorityStep3: '03 · Recargas',
+      priorityLabel3: 'Cierra el plan con claridad',
+      priorityCaption3: 'Elige entrada o masaje, trae tu documentación y llega con tiempo para disfrutar mejor',
+      heroFact1: 'Horario actual: 14:00 a 23:00',
+      heroFact2: 'Documentación obligatoria',
+      heroFact3: 'WhatsApp recomendado antes de venir',
+      firstVisitTitle: 'Prepara tu primera visita',
+      firstVisitSubtitle: 'El 80% de lo importante se resume en tres comprobaciones rápidas antes de salir.',
+      visitPriorityKicker: 'Recomendación',
+      visitPriorityTitle: 'Si es tu primera vez, empieza por una visita entre semana',
+      visitPriorityText: 'Suele haber un ritmo más calmado, menos fricción al llegar y mejor margen para orientarte en el espacio.',
+      visitPriorityPoint1: 'Recomendado para primera visita: ven con tiempo y sin prisas',
+      visitPriorityPoint2: 'Documentación válida obligatoria en recepción',
+      visitPriorityPoint3: 'Confirma disponibilidad por WhatsApp antes de desplazarte',
+      visitPriorityCta: 'Ver horarios',
+      checklistItem1: 'He confirmado horario y disponibilidad por WhatsApp',
+      checklistItem2: 'Ya sé qué entrada o servicio encaja mejor con mi visita',
+      checklistItem3: 'Llevo documentación válida y tiempo suficiente para llegar con calma'
+    }
+  };
+
+  function applyGuidance() {
+    const language = getCurrentLanguage();
+    const copy = content[language] || content.es;
+
+    Object.entries(copy).forEach(([key, value]) => {
+      const id = key
+        .replace(/[A-Z]/g, match => `-${match.toLowerCase()}`)
+        .replace(/([a-z])([0-9])/g, '$1-$2');
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    });
+  }
+
+  applyGuidance();
+  document.addEventListener('languagechange', applyGuidance);
+}
+
+function initFirstVisitChecklist() {
+  const checklist = document.getElementById('checklist-list');
+  const statusLabel = document.getElementById('checklist-status-label');
+  const statusText = document.getElementById('checklist-status-text');
+  const progressBar = document.getElementById('checklist-progress-bar');
+  const cta = document.getElementById('checklist-cta');
+
+  if (!checklist || !statusLabel || !statusText || !progressBar || !cta) return;
+
+  const inputs = Array.from(checklist.querySelectorAll('input[type="checkbox"]'));
+  const storageKey = 'first-visit-checklist';
+
+  function getCopy(language, checkedCount, total) {
+    if (language === 'en') {
+      return {
+        statusLabel: 'Pre-visit checklist',
+        statusText: `${checkedCount} of ${total} completed`,
+        cta: checkedCount === total ? 'Ready to confirm on WhatsApp' : 'Complete it on WhatsApp'
+      };
+    }
+
+    return {
+      statusLabel: 'Checklist previa',
+      statusText: `${checkedCount} de ${total} completado`,
+      cta: checkedCount === total ? 'Lista para confirmar por WhatsApp' : 'Completar por WhatsApp'
+    };
+  }
+
+  function persistState() {
+    localStorage.setItem(storageKey, JSON.stringify(inputs.map(input => input.checked)));
+  }
+
+  function restoreState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      inputs.forEach((input, index) => {
+        input.checked = Boolean(saved[index]);
+      });
+    } catch (error) {
+      inputs.forEach(input => {
+        input.checked = false;
+      });
+    }
+  }
+
+  function syncChecklist() {
+    const checkedCount = inputs.filter(input => input.checked).length;
+    const progress = inputs.length ? (checkedCount / inputs.length) * 100 : 0;
+    const copy = getCopy(getCurrentLanguage(), checkedCount, inputs.length);
+
+    statusLabel.textContent = copy.statusLabel;
+    statusText.textContent = copy.statusText;
+    cta.textContent = copy.cta;
+    cta.classList.toggle('is-ready', checkedCount === inputs.length);
+    progressBar.style.width = `${progress}%`;
+  }
+
+  restoreState();
+  syncChecklist();
+
+  inputs.forEach(input => {
+    input.addEventListener('change', function() {
+      persistState();
+      syncChecklist();
+    });
+  });
+
+  document.addEventListener('languagechange', syncChecklist);
 }
 
 // ========== Interactive Tour ==========

@@ -146,6 +146,35 @@
       <button class="btn btn-primary" type="button" data-scroll-target="precios">Ver precios</button>
       <button class="btn btn-secondary" type="button" data-action="open-whatsapp">Consultar por WhatsApp</button>
     </div>
+    <div class="hero-priority-panel" data-aos="fade-up" data-aos-delay="380">
+      <div class="hero-priority-copy">
+        <p class="hero-kicker" id="hero-priority-kicker">Empieza aquí</p>
+        <h2 class="hero-priority-title" id="hero-priority-title">Tu visita en 3 tiempos</h2>
+        <p class="hero-priority-text" id="hero-priority-text">Una sola guía para entender cómo empieza tu visita, cómo se vive dentro y qué conviene dejar listo antes de venir.</p>
+      </div>
+      <div class="hero-priority-actions">
+        <button class="priority-action-card featured" type="button" data-action="open-whatsapp">
+          <span class="priority-step" id="priority-step-1">01 · Llegas</span>
+          <strong id="priority-label-1">Confirma antes de salir</strong>
+          <small id="priority-caption-1">WhatsApp te ayuda a validar disponibilidad y resolver dudas antes de salir</small>
+        </button>
+        <button class="priority-action-card" type="button" data-scroll-target="horarios">
+          <span class="priority-step" id="priority-step-2">02 · Desconectas</span>
+          <strong id="priority-label-2">Elige el ritmo de tu visita</strong>
+          <small id="priority-caption-2">Consulta horarios y decide si prefieres un ambiente más tranquilo o más social</small>
+        </button>
+        <button class="priority-action-card" type="button" data-scroll-target="precios">
+          <span class="priority-step" id="priority-step-3">03 · Recargas</span>
+          <strong id="priority-label-3">Cierra el plan con claridad</strong>
+          <small id="priority-caption-3">Elige entrada o masaje, trae tu documentación y llega con tiempo para disfrutar mejor</small>
+        </button>
+      </div>
+      <div class="hero-priority-facts">
+        <span id="hero-fact-1">Horario actual: 14:00 a 23:00</span>
+        <span id="hero-fact-2">Documentación obligatoria</span>
+        <span id="hero-fact-3">WhatsApp recomendado antes de venir</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -169,29 +198,53 @@
   </div>
 </section>
 
-<!-- ========== NARRATIVA VISUAL ========== -->
-<section class="section journey">
+<!-- ========== PRIMERA VISITA ========== -->
+<section class="section first-visit">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <h2 class="section-title">Una visita en 3 momentos</h2>
-      <p class="section-subtitle">Un recorrido claro para anticipar cada sensación desde tu llegada</p>
+      <h2 class="section-title" id="first-visit-title">Prepara tu primera visita</h2>
+      <p class="section-subtitle" id="first-visit-subtitle">El 80% de lo importante se resume en tres comprobaciones rápidas antes de salir.</p>
     </div>
-    <div class="journey-line" data-aos="fade-up" data-aos-delay="100">
-      <article class="journey-step">
-        <span class="journey-index">01</span>
-        <h3>Llegas</h3>
-        <p>Acceso en recepción, bienvenida ágil y orientación breve para que elijas tu ritmo desde el primer minuto.</p>
+    <div class="first-visit-layout">
+      <article class="checklist-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="checklist-progress-wrap">
+          <span id="checklist-status-label">Checklist previa</span>
+          <strong id="checklist-status-text">0 de 3 completado</strong>
+        </div>
+        <div class="checklist-progress"><i id="checklist-progress-bar"></i></div>
+        <ul class="checklist-list" id="checklist-list">
+          <li>
+            <label>
+              <input type="checkbox" value="availability">
+              <span id="checklist-item-1">He confirmado horario y disponibilidad por WhatsApp</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" value="entry">
+              <span id="checklist-item-2">Ya sé qué entrada o servicio encaja mejor con mi visita</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" value="id">
+              <span id="checklist-item-3">Llevo documentación válida y tiempo suficiente para llegar con calma</span>
+            </label>
+          </li>
+        </ul>
+        <button class="btn btn-primary checklist-cta" id="checklist-cta" type="button" data-action="open-whatsapp">Completar por WhatsApp</button>
       </article>
-      <article class="journey-step">
-        <span class="journey-index">02</span>
-        <h3>Desconectas</h3>
-        <p>Recorre sauna, vapor y jacuzzi para bajar pulsaciones, soltar tensión y entrar en modo pausa.</p>
-      </article>
-      <article class="journey-step">
-        <span class="journey-index">03</span>
-        <h3>Recargas</h3>
-        <p>Cierra en zonas de descanso con sensación de calma, claridad y energía renovada.</p>
-      </article>
+      <aside class="visit-priority-card" data-aos="fade-up" data-aos-delay="180">
+        <p class="visit-priority-kicker" id="visit-priority-kicker">Recomendación</p>
+        <h3 id="visit-priority-title">Si es tu primera vez, empieza por una visita entre semana</h3>
+        <p id="visit-priority-text">Suele haber un ritmo más calmado, menos fricción al llegar y mejor margen para orientarte en el espacio.</p>
+        <div class="visit-priority-points">
+          <span id="visit-priority-point-1">Recomendado para primera visita: ven con tiempo y sin prisas</span>
+          <span id="visit-priority-point-2">Documentación válida obligatoria en recepción</span>
+          <span id="visit-priority-point-3">Confirma disponibilidad por WhatsApp antes de desplazarte</span>
+        </div>
+        <button class="btn btn-secondary" id="visit-priority-cta" type="button" data-scroll-target="horarios">Ver horarios</button>
+      </aside>
     </div>
   </div>
 </section>

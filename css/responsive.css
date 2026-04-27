@@ -298,15 +298,6 @@
     font-size: 24px;
   }
 
-  .occupancy-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .occupancy-row em {
-    text-align: left;
-  }
-
   .tour-stage {
     min-height: 220px;
     max-height: 260px;
